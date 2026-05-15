@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+    <color name="color_principal">#FF1F3C58</color>
+    <color name="color_secundario">#FF4A90E2</color>
+    <color name="fondo_principal">#FFF4F6F8</color>
+    <color name="tarjetas_cards">#FFFFFFFF</color>
+    <color name="texto_principal">#FF2D3436</color>
+    <color name="texto_secundario">#FF636E72</color>
+    <color name="bordes_lineas">#FFDCDDE1</color>
+
 </resources>

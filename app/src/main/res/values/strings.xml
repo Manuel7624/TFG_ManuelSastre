@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Balancea</string>
+
+    <string name="Nombre_de_usuario">Nombre de usuario</string>
+    <string name="Correo_electronico">Correo electronico</string>
+    <string name="Contraseña">Contraseña</string>
+    <string name="Confirmar_contraseña">Confirmar contraseña</string>
+    <string name="Iniciar_sesion">Iniciar sesion</string>
+    <string name="Registrarse">Registrarse</string>
+
 </resources>

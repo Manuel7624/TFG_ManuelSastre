@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondo_principal"
+    tools:context=".RegistroUsuario">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="260dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/chatgpt_image_15_may_2026__10_40_58" />
+
+    <EditText
+        android:id="@+id/campoNombreUsuarioRegistroUsuario"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="101dp"
+        android:ems="10"
+        android:hint="@string/Nombre_de_usuario"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <EditText
+        android:id="@+id/campoCorreoRegistroUsuario"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="35dp"
+        android:ems="10"
+        android:hint="@string/Correo_electronico"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/campoNombreUsuarioRegistroUsuario" />
+
+    <EditText
+        android:id="@+id/campoPassRegistroUsuario"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="35dp"
+        android:ems="10"
+        android:hint="@string/Contraseña"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/campoCorreoRegistroUsuario" />
+
+    <EditText
+        android:id="@+id/campoConfirmarPassRegistroUsuario"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="35dp"
+        android:ems="10"
+        android:hint="@string/Confirmar_contraseña"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/campoPassRegistroUsuario" />
+
+    <Button
+        android:id="@+id/botonRegistrarseRegistroUsuario"
+        android:layout_width="200dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="35dp"
+        android:backgroundTint="@color/color_principal"
+        android:text="@string/Registrarse"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/campoConfirmarPassRegistroUsuario" />
+</androidx.constraintlayout.widget.ConstraintLayout>

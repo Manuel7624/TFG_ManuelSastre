@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/fondo_principal"
-    tools:context=".RegistroUsuario">
+    tools:context=".Ventanas.RegistroUsuario">
 
     <ImageView
         android:id="@+id/imageView"
@@ -27,9 +27,14 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="101dp"
+        android:background="@drawable/edittext_selector"
+        android:backgroundTint="@null"
         android:ems="10"
         android:hint="@string/Nombre_de_usuario"
         android:inputType="text"
+        android:paddingLeft="7dp"
+        android:textColor="@color/texto_principal"
+        android:textColorHint="@color/texto_secundario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -39,9 +44,14 @@
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="35dp"
+        android:background="@drawable/edittext_selector"
+        android:backgroundTint="@null"
         android:ems="10"
         android:hint="@string/Correo_electronico"
         android:inputType="textEmailAddress"
+        android:paddingLeft="7dp"
+        android:textColor="@color/texto_principal"
+        android:textColorHint="@color/texto_secundario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/campoNombreUsuarioRegistroUsuario" />
@@ -51,9 +61,14 @@
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="35dp"
+        android:background="@drawable/edittext_selector"
+        android:backgroundTint="@null"
         android:ems="10"
         android:hint="@string/Contraseña"
         android:inputType="textPassword"
+        android:paddingLeft="7dp"
+        android:textColor="@color/texto_principal"
+        android:textColorHint="@color/texto_secundario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/campoCorreoRegistroUsuario" />
@@ -63,9 +78,14 @@
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="35dp"
+        android:background="@drawable/edittext_selector"
+        android:backgroundTint="@null"
         android:ems="10"
         android:hint="@string/Confirmar_contraseña"
         android:inputType="textPassword"
+        android:paddingLeft="7dp"
+        android:textColor="@color/texto_principal"
+        android:textColorHint="@color/texto_secundario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/campoPassRegistroUsuario" />

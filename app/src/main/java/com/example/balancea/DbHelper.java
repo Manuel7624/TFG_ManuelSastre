@@ -70,7 +70,9 @@ public class DbHelper extends SQLiteOpenHelper {
                 "('Beca', 'ingreso')," +
                 "('Regalo', 'ingreso')," +
                 "('Venta', 'ingreso')," +
-                "('Otros', 'ingreso');");
+                "('Otros', 'ingreso')," +
+                "('Saldo inicial', 'ingreso')," +
+                "('Saldo inicial', 'gasto');");
 
     }
 

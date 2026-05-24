@@ -1,7 +1,6 @@
 package com.example.balancea.Ventanas;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -19,7 +17,6 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.balancea.Consultas;
 import com.example.balancea.DbHelper;
 import com.example.balancea.R;
-import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -90,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 Consultas con = new Consultas(MainActivity.this);
 
                 if(correoUsuario.isEmpty() || contrasenya.isEmpty()){
-                    campoCorreoConInco.setText(R.string.CorrConVacios);
+                    campoCorreoConInco.setText(R.string.CamposVacios);
                     campoCorreoConInco.setVisibility(View.VISIBLE);
                     return;
                 }
@@ -126,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 pass.setText("");
                 Intent intent = new Intent(MainActivity.this, RegistroUsuario.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

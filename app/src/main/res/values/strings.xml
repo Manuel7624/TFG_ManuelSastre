@@ -7,8 +7,26 @@
     <string name="Confirmar_contraseña">Confirmar contraseña</string>
     <string name="Iniciar_sesion">Iniciar sesion</string>
     <string name="Registrarse">Registrarse</string>
+    <string name="Continuar">Continuar</string>
+
+
     <string name="CorrConIncorrectos">⚠ Correo o contraseña incorrectos</string>
-    <string name="CorrConVacios">⚠ Es obligatorio rellenar todos los campos</string>
-    <string name="CorrInvalido">El formato del correo electrónico es erróneo</string>
+    <string name="CamposVacios">⚠ Es obligatorio rellenar todos los campos</string>
+    <string name="CorrInvalido">⚠ El formato del correo electrónico es erróneo</string>
+    <string name="NombreMinimoCaracteres">⚠ El nombre debe tener al menos 3 caracteres</string>
+    <string name="FormatoCorreoErroneo">⚠ El formato del correo no es válido</string>
+    <string name="CorreoYaRegistrado">⚠ Este correo ya está registrado</string>
+    <string name="ContrasenasNoCoinciden">⚠ Las contraseñas no coinciden</string>
+    <string name="ContrasenaMinimoCaracteres">⚠ La contraseña debe tener al menos 8 carácteres</string>
+    <string name="ObligatorioSaldo">⚠ Es obligatorio introducir un saldo inicial</string>
+    <string name="SaldoErroneo">⚠ El formato del saldo es incorrecto</string>
+
+
+    <string name="Bienvenido">¡Bienvenido!</string>
+    <string name="IntroduceSaldo">Introduce tu saldo actual\npara empezar a usar Balancea</string>
+    <string name="SaldoActual">Saldo actual</string>
+    <string name="simbolo_euro">€</string>
+    <string name="PuedeSerNegativo">Puede ser negativo si tienes deudas</string>
+
 
 </resources>

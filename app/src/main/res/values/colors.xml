@@ -8,5 +8,6 @@
     <color name="texto_principal">#FF2D3436</color>
     <color name="texto_secundario">#FF636E72</color>
     <color name="bordes_lineas">#FFDCDDE1</color>
+    <color name="error">#FFD32F2F</color>
 
 </resources>

@@ -11,8 +11,9 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="0dp"
-        android:layout_height="260dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="240dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/fondo_principal"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -20,13 +21,25 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/chatgpt_image_15_may_2026__10_40_58" />
 
+    <TextView
+        android:id="@+id/campoErrorRegistroUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        android:textColor="@color/error"
+        android:textSize="13sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
     <EditText
         android:id="@+id/campoNombreUsuarioRegistroUsuario"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="101dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="24dp"
         android:background="@drawable/edittext_selector"
         android:backgroundTint="@null"
         android:ems="10"
@@ -44,6 +57,7 @@
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="35dp"
+        android:layout_marginEnd="24dp"
         android:background="@drawable/edittext_selector"
         android:backgroundTint="@null"
         android:ems="10"
@@ -61,6 +75,7 @@
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="35dp"
+        android:layout_marginEnd="24dp"
         android:background="@drawable/edittext_selector"
         android:backgroundTint="@null"
         android:ems="10"
@@ -78,6 +93,7 @@
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="35dp"
+        android:layout_marginEnd="24dp"
         android:background="@drawable/edittext_selector"
         android:backgroundTint="@null"
         android:ems="10"
@@ -90,15 +106,105 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/campoPassRegistroUsuario" />
 
+    <ImageView
+        android:id="@+id/imagenNombreRegistro"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="55dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/campoNombreUsuarioRegistroUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:srcCompat="@drawable/usuario_normal" />
+
+    <ImageView
+        android:id="@+id/imagenCorreoRegistro"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="55dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/campoCorreoRegistroUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/imagenNombreRegistro"
+        app:srcCompat="@drawable/email_normal" />
+
+    <ImageView
+        android:id="@+id/imagenPassRegistro"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="55dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/campoPassRegistroUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/imagenCorreoRegistro"
+        app:srcCompat="@drawable/pass_normal" />
+
+    <ImageView
+        android:id="@+id/imagenConfirmarPassRegistro"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="55dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/campoConfirmarPassRegistroUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/imagenPassRegistro"
+        app:srcCompat="@drawable/pass_normal" />
+
     <Button
         android:id="@+id/botonRegistrarseRegistroUsuario"
         android:layout_width="200dp"
         android:layout_height="55dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="22dp"
         android:backgroundTint="@color/color_principal"
         android:text="@string/Registrarse"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/campoConfirmarPassRegistroUsuario" />
+
+    <Button
+        android:id="@+id/botonIniciarSesionRegistroUsuario"
+        android:layout_width="200dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="161dp"
+        android:backgroundTint="@color/color_secundario"
+        android:text="@string/Iniciar_sesion"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/botonRegistrarseRegistroUsuario" />
+
+    <ImageView
+        android:id="@+id/imagenVerPassConRegistroUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="192dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintEnd_toStartOf="@+id/campoPassRegistroUsuario"
+        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:srcCompat="@drawable/ojo_off" />
+
+    <ImageView
+        android:id="@+id/imagenVerPassConfConRegistroUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintEnd_toStartOf="@+id/campoConfirmarPassRegistroUsuario"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagenVerPassConRegistroUsuario"
+        app:srcCompat="@drawable/ojo_off" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

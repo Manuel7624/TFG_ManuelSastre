@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Balancea">
         <activity
+            android:name=".Ventanas.IntroducirSaldo"
+            android:exported="false" />
+        <activity
             android:name=".Ventanas.Principal"
             android:exported="false" />
         <activity
@@ -28,7 +31,7 @@
             android:exported="false" />
         <activity
             android:name=".Ventanas.MainActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
     </application>
 
 </manifest>

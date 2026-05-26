@@ -9,8 +9,9 @@
     tools:context=".Ventanas.Principal">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="wrap_content"
-        android:layout_height="280dp"
+        android:layout_height="260dp"
         android:background="@color/color_principal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -52,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="25dp"
             android:layout_marginEnd="335dp"
             android:text="@string/SaldoActual"
             android:textColor="#88FFFFFF"
@@ -83,7 +84,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="8dp"
             app:cardCornerRadius="18dp"
             app:cardElevation="0dp"
@@ -145,7 +146,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             app:cardCornerRadius="18dp"
             app:cardElevation="0dp"
@@ -202,5 +203,151 @@
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/bordes_card"
+        android:padding="1dp"
+        app:cardCornerRadius="22dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bordes_card">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/Resumen"
+                android:textColor="@color/texto_principal"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/campoEsteMesPrincipal"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="108dp"
+                android:background="@drawable/tab_activo"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="@string/EsteMes"
+                android:textColor="@color/tarjetas_cards"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView4"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/campoGeneralPrincipal"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="29dp"
+                android:background="@drawable/tab_inactivo"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="@string/General"
+                android:textColor="@color/texto_principal"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/campoEsteMesPrincipal"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/graficaResumen"
+
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+
+                android:layout_marginTop="20dp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/campoEsteMesPrincipal" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="50dp"
+                android:text="@string/Ingresos"
+                android:textColor="@color/texto_secundario"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/graficaResumen"
+                app:layout_constraintTop_toBottomOf="@+id/campoEsteMesPrincipal" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/Gastos"
+                android:textColor="@color/texto_secundario"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/graficaResumen"
+                app:layout_constraintTop_toBottomOf="@+id/campoIngresosResumenPrincipal" />
+
+            <TextView
+                android:id="@+id/campoIngresosResumenPrincipal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="2dp"
+                android:text="TextView"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/graficaResumen"
+                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+            <TextView
+                android:id="@+id/campoGastosResumenPrincipal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="2dp"
+                android:text="TextView"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/graficaResumen"
+                app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="108dp"
+                app:layout_constraintStart_toEndOf="@+id/graficaResumen"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/azul_grafica" />
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="49dp"
+                app:layout_constraintStart_toEndOf="@+id/graficaResumen"
+                app:layout_constraintTop_toBottomOf="@+id/imageView6"
+                app:srcCompat="@drawable/rojo_grafica" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

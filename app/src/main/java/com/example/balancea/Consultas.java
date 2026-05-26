@@ -223,4 +223,72 @@ public class Consultas extends DbHelper{
         return gastos;
     }
 
+    public static double obtenerIngresosMesActual(Context context, String correoUsuario) {
+
+        double ingresos = 0;
+
+        DbHelper helper = new DbHelper(context);
+
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        String consulta =
+                "SELECT SUM(m.cantidad) " +
+                        "FROM movimientos m " +
+                        "INNER JOIN usuarios u " +
+                        "ON m.id_usuario = u.id_usuario " +
+                        "WHERE u.email = ? " +
+                        "AND m.tipo = 'ingreso' " +
+                        "AND strftime('%Y-%m', m.fecha) = strftime('%Y-%m', 'now')";
+
+        Cursor cursor = db.rawQuery(
+                consulta,
+                new String[]{correoUsuario}
+        );
+
+        if(cursor.moveToFirst()){
+
+            ingresos = cursor.getDouble(0);
+        }
+
+        cursor.close();
+
+        db.close();
+
+        return ingresos;
+    }
+
+    public static double obtenerGastosMesActual(Context context, String correoUsuario) {
+
+        double gastos = 0;
+
+        DbHelper helper = new DbHelper(context);
+
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        String consulta =
+                "SELECT SUM(m.cantidad) " +
+                        "FROM movimientos m " +
+                        "INNER JOIN usuarios u " +
+                        "ON m.id_usuario = u.id_usuario " +
+                        "WHERE u.email = ? " +
+                        "AND m.tipo = 'gasto' " +
+                        "AND strftime('%Y-%m', m.fecha) = strftime('%Y-%m', 'now')";
+
+        Cursor cursor = db.rawQuery(
+                consulta,
+                new String[]{correoUsuario}
+        );
+
+        if(cursor.moveToFirst()){
+
+            gastos = cursor.getDouble(0);
+        }
+
+        cursor.close();
+
+        db.close();
+
+        return gastos;
+    }
+
 }

@@ -31,6 +31,9 @@
 
     <string name="Ingresos">Ingresos</string>
     <string name="Gastos">Gastos</string>
+    <string name="Resumen">Resumen</string>
+    <string name="EsteMes">Este mes</string>
+    <string name="General">General</string>
 
 
 </resources>

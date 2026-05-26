@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/fondo_principal"
     tools:context=".Ventanas.Principal">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="wrap_content"
-        android:layout_height="260dp"
+        android:layout_height="245dp"
         android:background="@color/color_principal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="335dp"
             android:text="@string/SaldoActual"
             android:textColor="#88FFFFFF"
@@ -84,7 +84,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             app:cardCornerRadius="18dp"
             app:cardElevation="0dp"
@@ -146,7 +146,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="20dp"
             app:cardCornerRadius="18dp"
             app:cardElevation="0dp"
@@ -205,8 +205,9 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
         android:layout_width="0dp"
-        android:layout_height="250dp"
+        android:layout_height="235dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
@@ -270,15 +271,62 @@
                 app:layout_constraintStart_toEndOf="@+id/campoEsteMesPrincipal"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/textBalanceTitulo"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="45dp"
+
+                android:text="Balance"
+                android:textColor="@color/texto_secundario"
+                android:textSize="12sp"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/campoEsteMesPrincipal" />
+
+            <TextView
+                android:id="@+id/campoPorcentajeBalancePrincipal"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="3dp"
+
+                android:text="+0%"
+                android:textColor="@color/ingreso"
+                android:textSize="28sp"
+                android:textStyle="bold"
+
+                app:layout_constraintStart_toStartOf="@id/textBalanceTitulo"
+                app:layout_constraintTop_toBottomOf="@id/textBalanceTitulo" />
+
+            <TextView
+                android:id="@+id/textIngresosVsGastos"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="2dp"
+
+                android:text="Ingresos\nvs gastos"
+                android:textColor="@color/texto_secundario"
+                android:textSize="12sp"
+
+                app:layout_constraintStart_toStartOf="@id/campoPorcentajeBalancePrincipal"
+                app:layout_constraintTop_toBottomOf="@id/campoPorcentajeBalancePrincipal" />
+
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/graficaResumen"
 
-                android:layout_width="160dp"
-                android:layout_height="160dp"
+                android:layout_width="145dp"
+                android:layout_height="145dp"
 
-                android:layout_marginTop="20dp"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="28dp"
 
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/campoEsteMesPrincipal" />
 
@@ -291,7 +339,7 @@
                 android:text="@string/Ingresos"
                 android:textColor="@color/texto_secundario"
                 android:textSize="12sp"
-                app:layout_constraintStart_toEndOf="@+id/graficaResumen"
+                app:layout_constraintStart_toEndOf="@id/graficaResumen"
                 app:layout_constraintTop_toBottomOf="@+id/campoEsteMesPrincipal" />
 
             <TextView
@@ -303,7 +351,7 @@
                 android:text="@string/Gastos"
                 android:textColor="@color/texto_secundario"
                 android:textSize="12sp"
-                app:layout_constraintStart_toEndOf="@+id/graficaResumen"
+                app:layout_constraintStart_toEndOf="@id/graficaResumen"
                 app:layout_constraintTop_toBottomOf="@+id/campoIngresosResumenPrincipal" />
 
             <TextView
@@ -314,7 +362,7 @@
                 android:layout_marginTop="2dp"
                 android:text="TextView"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/graficaResumen"
+                app:layout_constraintStart_toEndOf="@id/graficaResumen"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
             <TextView
@@ -325,7 +373,7 @@
                 android:layout_marginTop="2dp"
                 android:text="TextView"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/graficaResumen"
+                app:layout_constraintStart_toEndOf="@id/graficaResumen"
                 app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
             <ImageView
@@ -334,7 +382,7 @@
                 android:layout_height="10dp"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="108dp"
-                app:layout_constraintStart_toEndOf="@+id/graficaResumen"
+                app:layout_constraintStart_toEndOf="@id/graficaResumen"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/azul_grafica" />
 
@@ -344,10 +392,131 @@
                 android:layout_height="10dp"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="49dp"
-                app:layout_constraintStart_toEndOf="@+id/graficaResumen"
+                app:layout_constraintStart_toEndOf="@id/graficaResumen"
                 app:layout_constraintTop_toBottomOf="@+id/imageView6"
                 app:srcCompat="@drawable/rojo_grafica" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
+    <!-- CARD ULTIMO MOVIMIENTO -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardUltimoMovimiento"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        app:cardCornerRadius="22dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView3">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bordes_card"
+            android:padding="18dp">
+
+            <!-- TITULO -->
+            <TextView
+                android:id="@+id/textUltimoMovimiento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Último movimiento"
+                android:textColor="@color/texto_principal"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- ICONO -->
+            <ImageView
+                android:id="@+id/iconoMovimiento"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_ingreso"
+                android:padding="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textUltimoMovimiento"
+                app:srcCompat="@drawable/ic_compras" />
+
+            <!-- TITULO MOVIMIENTO -->
+            <TextView
+                android:id="@+id/campoTituloMovimiento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:text="Compra"
+                android:textColor="@color/texto_principal"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/iconoMovimiento"
+                app:layout_constraintTop_toTopOf="@id/iconoMovimiento" />
+
+            <!-- FECHA -->
+            <TextView
+                android:id="@+id/campoFechaMovimiento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="3dp"
+                android:text="Hoy · Alimentación"
+                android:textColor="@color/texto_secundario"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@id/iconoMovimiento"
+                app:layout_constraintTop_toBottomOf="@id/campoTituloMovimiento" />
+
+            <!-- IMPORTE -->
+            <TextView
+                android:id="@+id/campoImporteMovimiento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:text="-45,20€"
+                android:textColor="@color/gasto"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/iconoMovimiento"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/iconoMovimiento" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- MENU INFERIOR -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardBottomMenu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+
+        android:layout_marginBottom="15dp"
+        app:cardCornerRadius="24dp"
+
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="@drawable/bordes_card"
+
+            app:itemIconTint="@null"
+            app:itemTextColor="@color/bottom_nav_colors"
+
+            app:labelVisibilityMode="labeled"
+
+            app:menu="@menu/bottom_menu" />
+
+    </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+

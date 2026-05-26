@@ -291,4 +291,30 @@ public class Consultas extends DbHelper{
         return gastos;
     }
 
+    public static Cursor obtenerUltimoMovimiento(Context context, String correoUsuario) {
+
+        DbHelper helper = new DbHelper(context);
+
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        String consulta =
+                "SELECT " +
+                        "m.tipo, " +
+                        "m.descripcion, " +
+                        "m.cantidad, " +
+                        "m.fecha, " +
+                        "m.id_categoria, " +
+                        "c.nombre " +
+                        "FROM movimientos m " +
+                        "INNER JOIN usuarios u " +
+                        "ON m.id_usuario = u.id_usuario " +
+                        "INNER JOIN categorias c " +
+                        "ON m.id_categoria = c.id_categoria " +
+                        "WHERE u.email = ? " +
+                        "ORDER BY m.id_movimiento DESC " +
+                        "LIMIT 1";
+
+        return db.rawQuery(consulta, new String[]{correoUsuario});
+    }
+
 }

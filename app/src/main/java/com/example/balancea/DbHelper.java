@@ -51,6 +51,8 @@ public class DbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(consulta_usuarios);
         sqLiteDatabase.execSQL(consulta_categorias);
 
+
+
         sqLiteDatabase.execSQL("INSERT INTO " + TABLA_USUARIOS +
                 " (nombre, email, password) VALUES " +
                 "('manuel', 'manus@gmail.com', 'manus')," +
@@ -74,6 +76,10 @@ public class DbHelper extends SQLiteOpenHelper {
                 "('Saldo inicial', 'ingreso')," +
                 "('Saldo inicial', 'gasto');");
 
+        sqLiteDatabase.execSQL("INSERT INTO " + TABLA_MOVIMIENTOS +
+                " (id_usuario, id_categoria, tipo, cantidad, descripcion, fecha)\n" +
+                "VALUES\n" +
+                "(1, 1, 'gasto', 1200.00, 'Comida familiar', '2026-05-26');");
     }
 
     @Override

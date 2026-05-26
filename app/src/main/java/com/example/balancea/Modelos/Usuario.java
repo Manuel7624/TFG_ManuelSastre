@@ -1,5 +1,12 @@
 package com.example.balancea.Modelos;
 
+import static com.example.balancea.Ventanas.MainActivity.CorreoActual;
+
+import android.database.Cursor;
+
+import com.example.balancea.Consultas;
+import com.example.balancea.R;
+
 public class Usuario {
 
     private String nombre, email, password;
@@ -34,3 +41,4 @@ public class Usuario {
         this.password = password;
     }
 }
+

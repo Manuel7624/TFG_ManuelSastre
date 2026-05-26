@@ -58,15 +58,16 @@ public class RegistroUsuario extends AppCompatActivity {
 
 
         // Ver contraseñas
+
         verPass.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, android.view.MotionEvent event) {
                 if (event.getAction() == android.view.MotionEvent.ACTION_DOWN) {
-                    pass.setTransformationMethod(null); // mostrar
+                    pass.setTransformationMethod(null);
                     verPass.setImageResource(R.drawable.ojo_normal);
                 } else if (event.getAction() == android.view.MotionEvent.ACTION_UP ||
                         event.getAction() == android.view.MotionEvent.ACTION_CANCEL) {
-                    pass.setTransformationMethod(android.text.method.PasswordTransformationMethod.getInstance()); // ocultar
+                    pass.setTransformationMethod(android.text.method.PasswordTransformationMethod.getInstance());
                     verPass.setImageResource(R.drawable.ojo_off);
                 }
                 pass.setSelection(pass.getText().length());

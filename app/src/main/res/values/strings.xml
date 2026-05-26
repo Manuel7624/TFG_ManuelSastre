@@ -29,4 +29,8 @@
     <string name="PuedeSerNegativo">Puede ser negativo si tienes deudas</string>
 
 
+    <string name="Ingresos">Ingresos</string>
+    <string name="Gastos">Gastos</string>
+
+
 </resources>

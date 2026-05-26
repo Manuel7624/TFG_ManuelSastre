@@ -105,4 +105,122 @@ public class Consultas extends DbHelper{
         return resultado;
     }
 
+    // Funciones ventana principal
+
+    public static String obtenerNombreUsuario(Context context, String correo) {
+
+        DbHelper dbHelper = new DbHelper(context);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String nombre = "";
+
+        String consulta =
+                "SELECT nombre FROM usuarios WHERE email = ?";
+
+        Cursor cursor = db.rawQuery(
+                consulta,
+                new String[]{correo}
+        );
+
+        if (cursor.moveToFirst()) {
+            nombre = cursor.getString(0);
+        }
+
+        cursor.close();
+        db.close();
+
+        return nombre;
+    }
+
+    public static double obtenerSaldoActual(Context context, String correo) {
+
+        DbHelper dbHelper = new DbHelper(context);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        double saldo = 0;
+
+        String consulta =
+                "SELECT " +
+                        "SUM(CASE WHEN tipo='ingreso' THEN cantidad ELSE -cantidad END) " +
+                        "FROM movimientos m " +
+                        "INNER JOIN usuarios u ON m.id_usuario = u.id_usuario " +
+                        "WHERE u.email = ?";
+
+        Cursor cursor = db.rawQuery(
+                consulta,
+                new String[]{correo}
+        );
+
+        if(cursor.moveToFirst()){
+
+            saldo = cursor.getDouble(0);
+
+        }
+
+        cursor.close();
+        db.close();
+
+        return saldo;
+    }
+
+    public static double obtenerIngresos(Context context, String correo) {
+
+        DbHelper dbHelper = new DbHelper(context);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        double ingresos = 0;
+
+        String consulta =
+                "SELECT SUM(cantidad) " +
+                        "FROM movimientos m " +
+                        "INNER JOIN usuarios u " +
+                        "ON m.id_usuario = u.id_usuario " +
+                        "WHERE u.email = ? " +
+                        "AND tipo = 'ingreso'";
+
+        Cursor cursor = db.rawQuery(
+                consulta,
+                new String[]{correo}
+        );
+
+        if(cursor.moveToFirst()){
+            ingresos = cursor.getDouble(0);
+        }
+
+        cursor.close();
+        db.close();
+
+        return ingresos;
+    }
+
+    public static double obtenerGastos(Context context, String correo) {
+
+        DbHelper dbHelper = new DbHelper(context);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        double gastos = 0;
+
+        String consulta =
+                "SELECT SUM(cantidad) " +
+                        "FROM movimientos m " +
+                        "INNER JOIN usuarios u " +
+                        "ON m.id_usuario = u.id_usuario " +
+                        "WHERE u.email = ? " +
+                        "AND tipo = 'gasto'";
+
+        Cursor cursor = db.rawQuery(
+                consulta,
+                new String[]{correo}
+        );
+
+        if(cursor.moveToFirst()){
+            gastos = cursor.getDouble(0);
+        }
+
+        cursor.close();
+        db.close();
+
+        return gastos;
+    }
+
 }

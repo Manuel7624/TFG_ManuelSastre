@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Balancea">
         <activity
+            android:name=".prueba"
+            android:exported="false" />
+        <activity
+            android:name=".Ventanas.PerfilUsuario"
+            android:exported="false" />
+        <activity
             android:name=".Ventanas.IntroducirSaldo"
             android:exported="false" />
         <activity

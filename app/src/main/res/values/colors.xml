@@ -9,5 +9,7 @@
     <color name="texto_secundario">#FF636E72</color>
     <color name="bordes_lineas">#FFDCDDE1</color>
     <color name="error">#FFD32F2F</color>
+    <color name="ingreso">#27AE60</color>
+    <color name="gasto">#E74C3C</color>
 
 </resources>

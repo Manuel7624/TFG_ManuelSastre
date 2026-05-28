@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:layout_marginBottom="10dp"
+
+    app:cardCornerRadius="20dp"
+    app:cardElevation="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bordes_card"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/iconoMovimientoItem"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="10dp"
+            android:background="@drawable/bg_ingreso"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_compras"/>
+
+        <TextView
+            android:id="@+id/campoCategoriaItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="14dp"
+
+            android:text="Comida"
+            android:textColor="@color/texto_principal"
+            android:textSize="15sp"
+            android:textStyle="bold"
+
+            app:layout_constraintStart_toEndOf="@id/iconoMovimientoItem"
+            app:layout_constraintTop_toTopOf="@id/iconoMovimientoItem"/>
+
+        <TextView
+            android:id="@+id/campoDescripcionItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="4dp"
+
+            android:text="Pizza"
+            android:textColor="@color/texto_secundario"
+            android:textSize="12sp"
+
+            app:layout_constraintStart_toEndOf="@id/iconoMovimientoItem"
+            app:layout_constraintTop_toBottomOf="@id/campoCategoriaItem"/>
+
+        <TextView
+            android:id="@+id/campoFechaItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="2dp"
+
+            android:text="2026-05-26"
+            android:textColor="@color/texto_secundario"
+            android:textSize="11sp"
+
+            app:layout_constraintStart_toEndOf="@id/iconoMovimientoItem"
+            app:layout_constraintTop_toBottomOf="@id/campoDescripcionItem"/>
+
+        <TextView
+            android:id="@+id/campoCantidadItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="-20€"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/gasto"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iconoMovimientoItem"
+            app:layout_constraintBottom_toBottomOf="@id/iconoMovimientoItem"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

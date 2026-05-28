@@ -14,7 +14,7 @@ import com.example.balancea.R;
 
 public class Splash extends AppCompatActivity {
 
-    private static final int TIEMPO_SPLASH = 3000;
+    private static final int TIEMPO_SPLASH = 2500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

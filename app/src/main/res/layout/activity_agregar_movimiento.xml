@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@color/fondo_principal"
+
+    tools:context=".Ventanas.AgregarMovimiento">
+
+
+    <!-- HEADER -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/headerAgregarMovimiento"
+
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+
+        android:background="@color/color_principal"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <!-- BOTON VOLVER -->
+
+        <ImageView
+            android:id="@+id/botonVolver"
+
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+
+            android:padding="15dp"
+            android:scaleType="centerCrop"
+
+            android:src="@drawable/flecha_atras"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/tarjetas_cards" />
+
+
+        <!-- TITULO -->
+
+        <TextView
+            android:id="@+id/textTituloAgregarMovimiento"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="10dp"
+
+            android:text="Agregar movimiento"
+            android:textColor="@color/tarjetas_cards"
+            android:textSize="26sp"
+            android:textStyle="bold"
+
+            app:layout_constraintBottom_toBottomOf="@id/botonVolver"
+            app:layout_constraintStart_toEndOf="@id/botonVolver"
+            app:layout_constraintTop_toTopOf="@id/botonVolver"
+            app:layout_constraintVertical_bias="0.40" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!-- CARD FORMULARIO -->
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardFormulario"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="18dp"
+
+        app:cardBackgroundColor="@color/tarjetas_cards"
+        app:cardCornerRadius="28dp"
+
+        app:cardElevation="0dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@id/headerAgregarMovimiento"
+        app:strokeColor="#D6DEE8"
+        app:strokeWidth="2dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="@drawable/bordes_card"
+
+            android:orientation="vertical"
+            android:padding="10dp">
+
+
+            <!-- TABS -->
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Tipo"
+                android:textColor="@color/texto_principal"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="10dp"
+
+                app:cardBackgroundColor="@color/tarjetas_cards"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="horizontal"
+
+                    android:padding="4dp">
+
+
+                    <TextView
+                        android:id="@+id/botonIngreso"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+
+                        android:layout_weight="1"
+
+                        android:background="@drawable/tab_activo"
+
+                        android:gravity="center"
+
+                        android:padding="14dp"
+
+                        android:text="Ingreso"
+                        android:textColor="@color/tarjetas_cards"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/botonGasto"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginStart="10dp"
+
+                        android:layout_weight="1"
+
+                        android:background="@drawable/tab_inactivo"
+
+                        android:gravity="center"
+
+                        android:padding="14dp"
+
+                        android:text="Gasto"
+                        android:textColor="@color/texto_principal" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <!-- CANTIDAD -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="15dp"
+
+                android:text="Cantidad"
+                android:textColor="@color/texto_principal"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:id="@+id/campoCantidad"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="10dp"
+
+                android:background="@drawable/bordes_card"
+
+                android:hint="0.00 €"
+
+                android:inputType="numberDecimal"
+
+                android:padding="16dp"
+
+                android:textColor="@color/texto_principal"
+                android:textColorHint="@color/texto_secundario"
+
+                android:textSize="18sp" />
+
+
+            <!-- CATEGORIA -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="22dp"
+
+                android:text="Categoría"
+                android:textColor="@color/texto_principal"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+
+            <Spinner
+                android:id="@+id/spinnerCategoria"
+
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+
+                android:layout_marginTop="10dp"
+
+                android:background="@drawable/bordes_card"
+
+                android:padding="12dp" />
+
+
+            <!-- DESCRIPCION -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="22dp"
+
+                android:text="Descripción"
+                android:textColor="@color/texto_principal"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:id="@+id/campoDescripcion"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="10dp"
+
+                android:background="@drawable/bordes_card"
+
+                android:hint="Opcional"
+
+                android:inputType="textCapSentences"
+
+                android:maxLength="25"
+
+                android:padding="16dp"
+                android:textColor="@color/texto_principal"
+                android:textColorHint="@color/texto_secundario" />
+
+
+            <!-- FECHA -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="22dp"
+
+                android:text="Fecha"
+                android:textColor="@color/texto_principal"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:id="@+id/campoFecha"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="10dp"
+
+                android:background="@drawable/bordes_card"
+
+                android:clickable="true"
+                android:focusable="false"
+                android:hint="Seleccionar fecha"
+
+                android:padding="16dp"
+
+                android:textColor="@color/texto_principal" />
+
+
+            <!-- BOTON GUARDAR -->
+
+            <TextView
+                android:id="@+id/campoErrorAgregarMovimiento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:gravity="center"
+                android:paddingLeft="50dp"
+                android:text="@string/CamposVacios"
+                android:textColor="@color/error"
+                android:textSize="13sp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/botonGuardarMovimiento"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="20dp"
+
+                android:padding="15dp"
+
+                android:text="Guardar movimiento"
+                android:textAllCaps="false"
+                android:textSize="17sp"
+                android:textStyle="bold"
+
+                app:backgroundTint="@color/color_principal"
+                app:cornerRadius="20dp" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 
 import com.example.balancea.Modelos.Usuario;
 
+import java.util.ArrayList;
+
 public class Consultas extends DbHelper{
 
     Context context;
@@ -312,9 +314,133 @@ public class Consultas extends DbHelper{
                         "ON m.id_categoria = c.id_categoria " +
                         "WHERE u.email = ? " +
                         "ORDER BY m.id_movimiento DESC " +
-                        "LIMIT 1";
+                        "LIMIT 2";
 
         return db.rawQuery(consulta, new String[]{correoUsuario});
+    }
+
+    public static Cursor obtenerMovimientos(Context context, String correoUsuario, String filtro, String busqueda, String orden) {
+
+        DbHelper helper = new DbHelper(context);
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        String consulta = "SELECT m.tipo, m.descripcion, m.cantidad, m.fecha, " +
+                        "m.id_categoria, c.nombre " +
+                        "FROM movimientos m " +
+                        "INNER JOIN usuarios u ON m.id_usuario = u.id_usuario " +
+                        "INNER JOIN categorias c ON m.id_categoria = c.id_categoria " +
+                        "WHERE u.email = ? ";
+
+        ArrayList<String> parametros = new ArrayList<>();
+        parametros.add(correoUsuario);
+
+        if (!filtro.equals("todos")) {
+
+            consulta += "AND m.tipo = ? ";
+
+            parametros.add(filtro);
+        }
+
+        if (busqueda != null && !busqueda.isEmpty()) {
+
+            consulta += "AND (c.nombre LIKE ? OR m.descripcion LIKE ?) ";
+
+            parametros.add("%" + busqueda + "%");
+            parametros.add("%" + busqueda + "%");
+        }
+
+        if(orden.equals("fecha")){
+
+            consulta += "ORDER BY m.fecha DESC, m.id_movimiento DESC";
+
+        }else{
+
+            consulta += "ORDER BY m.id_movimiento DESC";
+        }
+
+        return db.rawQuery(consulta, parametros.toArray(new String[0]));
+    }
+
+    public static boolean insertarMovimiento(Context context, String correoUsuario, int idCategoria, String tipo, double cantidad, String descripcion, String fecha) {
+
+        DbHelper helper = new DbHelper(context);
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        boolean resultado = false;
+
+        try {
+            Cursor cursor = db.rawQuery("SELECT id_usuario FROM usuarios WHERE email = ?", new String[]{correoUsuario});
+
+            if(cursor.moveToFirst()){
+
+                int idUsuario = cursor.getInt(0);
+
+                ContentValues values = new ContentValues();
+
+                values.put("id_usuario", idUsuario);
+                values.put("id_categoria", idCategoria);
+                values.put("tipo", tipo);
+                values.put("cantidad", cantidad);
+                values.put("descripcion", descripcion);
+                values.put("fecha", fecha);
+
+                long res = db.insert(TABLA_MOVIMIENTOS, null, values);
+
+                resultado = res != -1;
+            }
+
+            cursor.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            db.close();
+        }
+
+        return resultado;
+    }
+
+
+    public static ArrayList<String> obtenerCategorias(Context context, String tipo) {
+
+        ArrayList<String> lista = new ArrayList<>();
+
+        DbHelper helper = new DbHelper(context);
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT nombre FROM categorias " + "WHERE tipo = ? " + "AND id_categoria != 14 " + "AND id_categoria != 15", new String[]{tipo});
+
+        while(cursor.moveToNext()){
+
+            lista.add(cursor.getString(0));
+        }
+
+        cursor.close();
+
+        db.close();
+
+        return lista;
+    }
+
+    public static int obtenerIdCategoria(Context context, String nombreCategoria) {
+
+        int id = 0;
+
+        DbHelper helper = new DbHelper(context);
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT id_categoria FROM categorias WHERE nombre = ?", new String[]{nombreCategoria});
+
+        if(cursor.moveToFirst()){
+
+            id = cursor.getInt(0);
+        }
+
+        cursor.close();
+        db.close();
+
+        return id;
     }
 
 }

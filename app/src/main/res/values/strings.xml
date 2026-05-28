@@ -20,6 +20,7 @@
     <string name="ContrasenaMinimoCaracteres">⚠ La contraseña debe tener al menos 8 carácteres</string>
     <string name="ObligatorioSaldo">⚠ Es obligatorio introducir un saldo inicial</string>
     <string name="SaldoErroneo">⚠ El formato del saldo es incorrecto</string>
+    <string name="CamposObligatorios">⚠ Completa los campos obligatorios</string>
 
 
     <string name="Bienvenido">¡Bienvenido!</string>

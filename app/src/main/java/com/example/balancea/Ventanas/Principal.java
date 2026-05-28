@@ -3,13 +3,18 @@ package com.example.balancea.Ventanas;
 import static com.example.balancea.Ventanas.MainActivity.CorreoActual;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -21,24 +26,51 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import android.database.Cursor;
 
 public class Principal extends AppCompatActivity {
 
     TextView campoSaludo;
+
     TextView botonEsteMes;
     TextView botonGeneral;
+
     TextView campoIngresosResumen;
     TextView campoGastosResumen;
 
     PieChart graficaResumen;
+
     TextView campoPorcentajeBalancePrincipal;
+
+    // MOVIMIENTO 1
+
     ImageView iconoMovimiento;
+
     TextView campoTituloMovimiento;
+
     TextView campoFechaMovimiento;
+
     TextView campoImporteMovimiento;
+
+    // MOVIMIENTO 2
+
+    ImageView iconoMovimiento2;
+
+    TextView campoTituloMovimiento2;
+
+    TextView campoFechaMovimiento2;
+
+    TextView campoImporteMovimiento2;
+
+    ConstraintLayout layoutMovimiento2;
+
+    private boolean salir = false;
+
+    // BOTON AGREGAR
+
+    FloatingActionButton botonAgregarMovimientoPrincipal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,36 +95,90 @@ public class Principal extends AppCompatActivity {
 
         campoSaludo = findViewById(R.id.campoSaludoUsuarioPrincipal);
 
-        TextView campoSaldoActualPrincipal = findViewById(R.id.campoSaldoActualPrincipal);
+        TextView campoSaldoActualPrincipal =
+                findViewById(R.id.campoSaldoActualPrincipal);
 
-        ImageView perfilUsuario = findViewById(R.id.imagenPerfilUsuarioPrincipal);
+        ImageView perfilUsuario =
+                findViewById(R.id.imagenPerfilUsuarioPrincipal);
 
-        TextView campoIngresosCardPrincipal = findViewById(R.id.campoIngresosCardPrincipal);
+        TextView campoIngresosCardPrincipal =
+                findViewById(R.id.campoIngresosCardPrincipal);
 
-        TextView campoGastosCardPrincipal = findViewById(R.id.campoGastosCardPrincipal);
+        TextView campoGastosCardPrincipal =
+                findViewById(R.id.campoGastosCardPrincipal);
 
-        botonEsteMes = findViewById(R.id.campoEsteMesPrincipal);
+        botonEsteMes =
+                findViewById(R.id.campoEsteMesPrincipal);
 
-        botonGeneral = findViewById(R.id.campoGeneralPrincipal);
+        botonGeneral =
+                findViewById(R.id.campoGeneralPrincipal);
 
-        campoIngresosResumen = findViewById(R.id.campoIngresosResumenPrincipal);
+        campoIngresosResumen =
+                findViewById(R.id.campoIngresosResumenPrincipal);
 
-        campoGastosResumen = findViewById(R.id.campoGastosResumenPrincipal);
+        campoGastosResumen =
+                findViewById(R.id.campoGastosResumenPrincipal);
 
-        campoPorcentajeBalancePrincipal = findViewById(R.id.campoPorcentajeBalancePrincipal);
+        campoPorcentajeBalancePrincipal =
+                findViewById(R.id.campoPorcentajeBalancePrincipal);
 
-        graficaResumen = findViewById(R.id.graficaResumen);
+        graficaResumen =
+                findViewById(R.id.graficaResumen);
 
-        iconoMovimiento = findViewById(R.id.iconoMovimiento);
 
-        campoTituloMovimiento = findViewById(R.id.campoTituloMovimiento);
+        // MOVIMIENTO 1
 
-        campoFechaMovimiento = findViewById(R.id.campoFechaMovimiento);
+        iconoMovimiento =
+                findViewById(R.id.iconoMovimiento);
 
-        campoImporteMovimiento = findViewById(R.id.campoImporteMovimiento);
+        campoTituloMovimiento =
+                findViewById(R.id.campoTituloMovimiento);
 
-        BottomNavigationView bottomNavigation = findViewById(R.id.bottomNavigation);
+        campoFechaMovimiento =
+                findViewById(R.id.campoFechaMovimiento);
 
+        campoImporteMovimiento =
+                findViewById(R.id.campoImporteMovimiento);
+
+
+        // MOVIMIENTO 2
+
+        iconoMovimiento2 =
+                findViewById(R.id.iconoMovimiento2);
+
+        campoTituloMovimiento2 =
+                findViewById(R.id.campoTituloMovimiento2);
+
+        campoFechaMovimiento2 =
+                findViewById(R.id.campoFechaMovimiento2);
+
+        campoImporteMovimiento2 =
+                findViewById(R.id.campoImporteMovimiento2);
+
+        layoutMovimiento2 =
+                findViewById(R.id.layoutMovimiento2);
+
+
+        // BOTON AGREGAR
+
+        botonAgregarMovimientoPrincipal =
+                findViewById(R.id.botonAgregarMovimientoPrincipal);
+
+
+        BottomNavigationView bottomNavigation =
+                findViewById(R.id.bottomNavigation);
+
+
+
+        // CLICK BOTON AGREGAR
+
+        botonAgregarMovimientoPrincipal.setOnClickListener(v -> {
+
+            Intent intent =
+                    new Intent(this, AgregarMovimiento.class);
+
+            startActivity(intent);
+        });
 
 
 
@@ -113,21 +199,26 @@ public class Principal extends AppCompatActivity {
         graficaResumen.setHighlightPerTapEnabled(false);
 
 
+
         // CARGAR SALUDO
 
-        String nombreUsuario = Consultas.obtenerNombreUsuario(this, CorreoActual);
+        String nombreUsuario =
+                Consultas.obtenerNombreUsuario(this, CorreoActual);
 
         campoSaludo.setText("Hola, " + nombreUsuario + " 👋");
+
 
 
         // PERFIL USUARIO
 
         perfilUsuario.setOnClickListener(v -> {
 
-            Intent intent = new Intent(Principal.this, PerfilUsuario.class);
+            Intent intent =
+                    new Intent(Principal.this, PerfilUsuario.class);
 
             startActivity(intent);
         });
+
 
 
         // SALDO ACTUAL
@@ -142,29 +233,34 @@ public class Principal extends AppCompatActivity {
 
         } else {
 
-            campoSaldoActualPrincipal.setTextColor(getColor(R.color.tarjetas_cards));
+            campoSaldoActualPrincipal.setTextColor(getColor(R.color.ingreso));
         }
 
 
-        // INGRESOS Y GASTOS GENERALES
+        // INGRESOS Y GASTOS
 
-        double ingresos = Consultas.obtenerIngresos(this, CorreoActual);
+        double ingresos =
+                Consultas.obtenerIngresos(this, CorreoActual);
 
-        double gastos = Consultas.obtenerGastos(this, CorreoActual);
+        double gastos =
+                Consultas.obtenerGastos(this, CorreoActual);
 
         campoIngresosCardPrincipal.setText(ingresos + " €");
 
         campoGastosCardPrincipal.setText(gastos + " €");
 
 
-        // CARGAR GRAFICA INICIAL
+
+        // CARGAR GRAFICA
 
         cargarGrafica(true);
 
 
-        // CARGAR ULTIMO MOVIMIENTO
 
-        cargarUltimoMovimiento();
+        // CARGAR ULTIMOS MOVIMIENTOS
+
+        cargarUltimosMovimientos();
+
 
 
         // BOTON ESTE MES
@@ -175,13 +271,17 @@ public class Principal extends AppCompatActivity {
 
             botonGeneral.setBackgroundResource(R.drawable.tab_inactivo);
 
-            botonEsteMes.setTextColor(getColor(R.color.tarjetas_cards));
+            botonEsteMes.setTextColor(
+                    getColor(R.color.tarjetas_cards)
+            );
 
-            botonGeneral.setTextColor(getColor(R.color.texto_principal));
+            botonGeneral.setTextColor(
+                    getColor(R.color.texto_principal)
+            );
 
             cargarGrafica(true);
-
         });
+
 
 
         // BOTON GENERAL
@@ -192,13 +292,17 @@ public class Principal extends AppCompatActivity {
 
             botonEsteMes.setBackgroundResource(R.drawable.tab_inactivo);
 
-            botonGeneral.setTextColor(getColor(R.color.tarjetas_cards));
+            botonGeneral.setTextColor(
+                    getColor(R.color.tarjetas_cards)
+            );
 
-            botonEsteMes.setTextColor(getColor(R.color.texto_principal));
+            botonEsteMes.setTextColor(
+                    getColor(R.color.texto_principal)
+            );
 
             cargarGrafica(false);
-
         });
+
 
 
         // NAVEGACION
@@ -210,18 +314,29 @@ public class Principal extends AppCompatActivity {
             int id = item.getItemId();
 
             if (id == R.id.nav_home) {
+
                 return true;
             }
 
             if (id == R.id.nav_movimientos) {
+
                 startActivity(new Intent(this, Movimientos.class));
+
                 overridePendingTransition(0, 0);
+
+                finish();
+
                 return true;
             }
 
             if (id == R.id.nav_stats) {
+
                 startActivity(new Intent(this, Graficas.class));
+
                 overridePendingTransition(0, 0);
+
+                finish();
+
                 return true;
             }
 
@@ -229,9 +344,42 @@ public class Principal extends AppCompatActivity {
         });
 
         bottomNavigation.setOnItemReselectedListener(item -> {
-            // no hacer nada si ya estás en la misma ventana
+
+            // no hacer nada
+        });
+
+
+        // PULSAR DOS VECES PARA SALIR DE LA APLICACION
+
+        getOnBackPressedDispatcher().addCallback(this, new androidx.activity.OnBackPressedCallback(true) {
+
+            @Override
+            public void handleOnBackPressed() {
+
+                if (salir) {
+
+                    finishAffinity();
+
+                } else {
+
+                    salir = true;
+
+                    Toast toast = Toast.makeText(
+                            Principal.this,
+                            "Pulse otra vez para salir",
+                            Toast.LENGTH_SHORT
+                    );
+
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+
+                    toast.show();
+
+                    new android.os.Handler().postDelayed(() -> salir = false, 2000);
+                }
+            }
         });
     }
+
 
 
     private void cargarGrafica(boolean soloEsteMes) {
@@ -241,19 +389,21 @@ public class Principal extends AppCompatActivity {
         double gastos;
 
 
-
-
         if (soloEsteMes) {
 
-            ingresos = Consultas.obtenerIngresosMesActual(this, CorreoActual);
+            ingresos =
+                    Consultas.obtenerIngresosMesActual(this, CorreoActual);
 
-            gastos = Consultas.obtenerGastosMesActual(this, CorreoActual);
+            gastos =
+                    Consultas.obtenerGastosMesActual(this, CorreoActual);
 
         } else {
 
-            ingresos = Consultas.obtenerIngresos(this, CorreoActual);
+            ingresos =
+                    Consultas.obtenerIngresos(this, CorreoActual);
 
-            gastos = Consultas.obtenerGastos(this, CorreoActual);
+            gastos =
+                    Consultas.obtenerGastos(this, CorreoActual);
         }
 
 
@@ -262,36 +412,54 @@ public class Principal extends AppCompatActivity {
         campoGastosResumen.setText(gastos + " €");
 
 
+
         // BALANCE
 
         double porcentajeBalance;
 
+        if (ingresos <= 0) {
 
-        if (gastos == 0) {
-
-            porcentajeBalance = 100;
+            porcentajeBalance = 0;
 
         } else {
 
-            porcentajeBalance = ((ingresos - gastos) / gastos) * 100;
+            porcentajeBalance =
+                    ((ingresos - gastos) / ingresos) * 100;
         }
+
+        String textoPorcentaje;
+
+        if (porcentajeBalance > 0) {
+
+            textoPorcentaje =
+                    "+" + (int) porcentajeBalance + "%";
+
+        } else {
+
+            textoPorcentaje =
+                    (int) porcentajeBalance + "%";
+        }
+
+        campoPorcentajeBalancePrincipal.setText(
+                textoPorcentaje
+        );
 
         if (porcentajeBalance >= 0) {
-            campoPorcentajeBalancePrincipal.setText("+" + (int) porcentajeBalance + "%");
-        } else {
-            campoPorcentajeBalancePrincipal.setText((int) porcentajeBalance + "%");
-        }
 
-        if (porcentajeBalance < 0) {
-
-            campoPorcentajeBalancePrincipal.setTextColor(getColor(R.color.gasto));
+            campoPorcentajeBalancePrincipal.setTextColor(
+                    getColor(R.color.ingreso)
+            );
 
         } else {
 
-            campoPorcentajeBalancePrincipal.setTextColor(getColor(R.color.ingreso));
+            campoPorcentajeBalancePrincipal.setTextColor(
+                    getColor(R.color.gasto)
+            );
         }
 
 
+
+        // GRAFICA VACIA
 
         if (ingresos == 0 && gastos == 0) {
 
@@ -301,6 +469,7 @@ public class Principal extends AppCompatActivity {
         }
 
 
+
         ArrayList<PieEntry> entradas = new ArrayList<>();
 
         entradas.add(new PieEntry((float) ingresos, "Ingresos"));
@@ -308,7 +477,10 @@ public class Principal extends AppCompatActivity {
         entradas.add(new PieEntry((float) gastos, "Gastos"));
 
 
-        PieDataSet dataSet = new PieDataSet(entradas, "");
+
+        PieDataSet dataSet =
+                new PieDataSet(entradas, "");
+
 
 
         ArrayList<Integer> colores = new ArrayList<>();
@@ -316,6 +488,7 @@ public class Principal extends AppCompatActivity {
         colores.add(Color.parseColor("#4A90E2"));
 
         colores.add(Color.parseColor("#FF5A52"));
+
 
 
         dataSet.setColors(colores);
@@ -331,6 +504,7 @@ public class Principal extends AppCompatActivity {
         graficaResumen.setDrawEntryLabels(false);
 
 
+
         PieData pieData = new PieData(dataSet);
 
         graficaResumen.setData(pieData);
@@ -340,120 +514,250 @@ public class Principal extends AppCompatActivity {
         graficaResumen.invalidate();
     }
 
-    private void cargarUltimoMovimiento() {
 
-        Cursor cursor = Consultas.obtenerUltimoMovimiento(this, CorreoActual);
 
-        if (cursor.moveToFirst()) {
+    private void cargarUltimosMovimientos() {
+
+        layoutMovimiento2.setVisibility(android.view.View.GONE);
+
+        campoTituloMovimiento.setText("-");
+        campoFechaMovimiento.setText("-");
+        campoImporteMovimiento.setText("-");
+
+        campoTituloMovimiento2.setText("-");
+        campoFechaMovimiento2.setText("-");
+        campoImporteMovimiento2.setText("-");
+
+        Cursor cursor =
+                Consultas.obtenerUltimoMovimiento(this, CorreoActual);
+
+
+        int contador = 0;
+
+
+        while (cursor.moveToNext() && contador < 2) {
 
             String tipo = cursor.getString(0);
+
             String descripcion = cursor.getString(1);
+
             double cantidad = cursor.getDouble(2);
+
             String fecha = cursor.getString(3);
+
             int idCategoria = cursor.getInt(4);
+
             String categoria = cursor.getString(5);
 
-            // ICONO CATEGORÍA
+
+            ImageView icono;
+
+            TextView titulo;
+
+            TextView fechaTexto;
+
+            TextView importe;
+
+
+            if (contador == 0) {
+
+                icono = iconoMovimiento;
+
+                titulo = campoTituloMovimiento;
+
+                fechaTexto = campoFechaMovimiento;
+
+                importe = campoImporteMovimiento;
+
+            } else {
+
+                layoutMovimiento2.setVisibility(android.view.View.VISIBLE);
+
+                layoutMovimiento2.setVisibility(View.VISIBLE);
+
+                icono = iconoMovimiento2;
+
+                titulo = campoTituloMovimiento2;
+
+                fechaTexto = campoFechaMovimiento2;
+
+                importe = campoImporteMovimiento2;
+            }
+
+
+
+            // ICONOS
 
             switch (idCategoria) {
 
                 case 1:
-                    iconoMovimiento.setImageResource(R.drawable.ic_comida);
+                    icono.setImageResource(R.drawable.ic_comida);
                     break;
 
                 case 2:
-                    iconoMovimiento.setImageResource(R.drawable.ic_transport);
+                    icono.setImageResource(R.drawable.ic_transport);
                     break;
 
                 case 3:
-                    iconoMovimiento.setImageResource(R.drawable.ic_ocio);
+                    icono.setImageResource(R.drawable.ic_ocio);
                     break;
 
                 case 4:
-                    iconoMovimiento.setImageResource(R.drawable.ic_vivienda);
+                    icono.setImageResource(R.drawable.ic_vivienda);
                     break;
 
                 case 5:
-                    iconoMovimiento.setImageResource(R.drawable.ic_salud);
+                    icono.setImageResource(R.drawable.ic_salud);
                     break;
 
                 case 6:
-                    iconoMovimiento.setImageResource(R.drawable.ic_educacion);
+                    icono.setImageResource(R.drawable.ic_educacion);
                     break;
 
                 case 7:
-                    iconoMovimiento.setImageResource(R.drawable.ic_compras);
+                    icono.setImageResource(R.drawable.ic_compras);
                     break;
 
                 case 8:
-                    iconoMovimiento.setImageResource(R.drawable.ic_otro_gasto);
+                    icono.setImageResource(R.drawable.ic_otro_gasto);
                     break;
 
                 case 9:
-                    iconoMovimiento.setImageResource(R.drawable.ic_nomina);
+                    icono.setImageResource(R.drawable.ic_nomina);
                     break;
 
                 case 10:
-                    iconoMovimiento.setImageResource(R.drawable.ic_beca);
+                    icono.setImageResource(R.drawable.ic_beca);
                     break;
 
                 case 11:
-                    iconoMovimiento.setImageResource(R.drawable.ic_regalo);
+                    icono.setImageResource(R.drawable.ic_regalo);
                     break;
 
                 case 12:
-                    iconoMovimiento.setImageResource(R.drawable.ic_venta);
+                    icono.setImageResource(R.drawable.ic_venta);
                     break;
 
                 case 13:
-                    iconoMovimiento.setImageResource(R.drawable.ic_otros_ingresos);
+                    icono.setImageResource(R.drawable.ic_otros_ingresos);
                     break;
 
                 case 14:
-                    iconoMovimiento.setImageResource(R.drawable.ic_saldo_inicial_ingreso);
+                    icono.setImageResource(R.drawable.ic_saldo_inicial_ingreso);
                     break;
 
                 case 15:
-                    iconoMovimiento.setImageResource(R.drawable.ic_saldo_incial_gasto);
+                    icono.setImageResource(R.drawable.ic_saldo_incial_gasto);
                     break;
 
                 default:
-                    iconoMovimiento.setImageResource(R.drawable.ic_gasto);
+                    icono.setImageResource(R.drawable.ic_gasto);
                     break;
             }
 
 
-            // TÍTULO
 
-            campoTituloMovimiento.setText(categoria);
+            // TITULO
 
-            // SUBTÍTULO
+            titulo.setText(categoria);
+
+
+
+            // FECHA
 
             String extra = "";
 
-            if (descripcion != null && !descripcion.trim().isEmpty()) {
+            if (descripcion != null &&
+                    !descripcion.trim().isEmpty()) {
+
                 extra = " · " + descripcion;
             }
 
-            campoFechaMovimiento.setText(fecha + extra);
+            fechaTexto.setText(fecha + extra);
+
 
 
             // IMPORTE
 
             if (tipo.equals("gasto")) {
 
-                campoImporteMovimiento.setText("-" + cantidad + " €");
-                campoImporteMovimiento.setTextColor(getColor(R.color.gasto));
-                iconoMovimiento.setBackgroundResource(R.drawable.bg_gasto);
+                importe.setText("-" + cantidad + " €");
+
+                importe.setTextColor(getColor(R.color.gasto));
+
+                icono.setBackgroundResource(R.drawable.bg_gasto);
 
             } else {
 
-                campoImporteMovimiento.setText("+" + cantidad + " €");
-                campoImporteMovimiento.setTextColor(getColor(R.color.ingreso));
-                iconoMovimiento.setBackgroundResource(R.drawable.bg_ingreso);
+                importe.setText("+" + cantidad + " €");
+
+                importe.setTextColor(getColor(R.color.ingreso));
+
+                icono.setBackgroundResource(R.drawable.bg_ingreso);
             }
+
+
+            contador++;
         }
 
+
+        // SI SOLO HAY 1 MOVIMIENTO
+
+        if (contador < 2) {
+
+            layoutMovimiento2.setVisibility(View.GONE);
+        }
+
+
         cursor.close();
+    }
+
+    // REFRESCAR LA VENTANA
+    @Override
+    protected void onResume() {
+
+        super.onResume();
+
+
+        double saldo = Consultas.obtenerSaldoActual(this, CorreoActual);
+
+        TextView campoSaldoActualPrincipal = findViewById(R.id.campoSaldoActualPrincipal);
+
+        campoSaldoActualPrincipal.setText(saldo + " €");
+
+        if (saldo < 0) {
+
+            campoSaldoActualPrincipal.setTextColor(
+                    getColor(R.color.gasto)
+            );
+
+        } else {
+
+            campoSaldoActualPrincipal.setTextColor(
+                    getColor(R.color.ingreso)
+            );
+        }
+
+
+        double ingresos = Consultas.obtenerIngresos(this, CorreoActual);
+
+        double gastos = Consultas.obtenerGastos(this, CorreoActual);
+
+        TextView campoIngresosCardPrincipal = findViewById(R.id.campoIngresosCardPrincipal);
+
+        TextView campoGastosCardPrincipal = findViewById(R.id.campoGastosCardPrincipal);
+
+        campoIngresosCardPrincipal.setText(ingresos + " €");
+
+        campoGastosCardPrincipal.setText(gastos + " €");
+
+
+        cargarGrafica(
+                botonEsteMes.getCurrentTextColor()
+                        == getColor(R.color.tarjetas_cards)
+        );
+
+
+        cargarUltimosMovimientos();
     }
 }

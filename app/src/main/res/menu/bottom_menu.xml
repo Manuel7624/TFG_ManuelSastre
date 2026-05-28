@@ -13,6 +13,6 @@
     <item
         android:id="@+id/nav_stats"
         android:icon="@drawable/ic_nav_grafica_selector"
-        android:title="Stats"/>
+        android:title="Graficas"/>
 
 </menu>

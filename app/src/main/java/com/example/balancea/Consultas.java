@@ -443,4 +443,156 @@ public class Consultas extends DbHelper{
         return id;
     }
 
+
+
+    // VENTANA GRAFICAS
+
+
+    public static Cursor obtenerGastosPorCategoria(Context context, String correoUsuario) {
+
+        DbHelper helper = new DbHelper(context);
+
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        String consulta =
+                "SELECT c.nombre, SUM(m.cantidad) total " +
+                        "FROM movimientos m " +
+                        "INNER JOIN usuarios u ON m.id_usuario = u.id_usuario " +
+                        "INNER JOIN categorias c ON m.id_categoria = c.id_categoria " +
+                        "WHERE u.email = ? " +
+                        "AND m.tipo = 'gasto' " +
+                        "GROUP BY c.nombre " +
+                        "ORDER BY total DESC";
+
+        return db.rawQuery(
+                consulta,
+                new String[]{correoUsuario}
+        );
+    }
+
+
+    public static Cursor obtenerIngresosPorCategoria(Context context, String correoUsuario) {
+
+        DbHelper helper = new DbHelper(context);
+
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        String consulta =
+                "SELECT c.nombre, SUM(m.cantidad) total " +
+                        "FROM movimientos m " +
+                        "INNER JOIN usuarios u ON m.id_usuario = u.id_usuario " +
+                        "INNER JOIN categorias c ON m.id_categoria = c.id_categoria " +
+                        "WHERE u.email = ? " +
+                        "AND m.tipo = 'ingreso' " +
+                        "GROUP BY c.nombre " +
+                        "ORDER BY total DESC";
+
+        return db.rawQuery(
+                consulta,
+                new String[]{correoUsuario}
+        );
+    }
+
+
+    public static String obtenerMayorGasto(Context context, String correoUsuario) {
+
+        DbHelper helper = new DbHelper(context);
+
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        String resultado = "Sin datos";
+
+        String consulta =
+                "SELECT c.nombre, MAX(m.cantidad) " +
+                        "FROM movimientos m " +
+                        "INNER JOIN usuarios u ON m.id_usuario = u.id_usuario " +
+                        "INNER JOIN categorias c ON m.id_categoria = c.id_categoria " +
+                        "WHERE u.email = ? " +
+                        "AND m.tipo = 'gasto'";
+
+        Cursor cursor = db.rawQuery(
+                consulta,
+                new String[]{correoUsuario}
+        );
+
+        if (cursor.moveToFirst() &&
+                cursor.getString(0) != null) {
+
+            String categoria = cursor.getString(0);
+
+            double cantidad = cursor.getDouble(1);
+
+            resultado = categoria + " · " + cantidad + "€";
+        }
+
+        cursor.close();
+
+        db.close();
+
+        return resultado;
+    }
+
+
+    public static String obtenerMayorIngreso(Context context, String correoUsuario) {
+
+        DbHelper helper = new DbHelper(context);
+
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        String resultado = "Sin datos";
+
+        String consulta =
+                "SELECT c.nombre, MAX(m.cantidad) " +
+                        "FROM movimientos m " +
+                        "INNER JOIN usuarios u ON m.id_usuario = u.id_usuario " +
+                        "INNER JOIN categorias c ON m.id_categoria = c.id_categoria " +
+                        "WHERE u.email = ? " +
+                        "AND m.tipo = 'ingreso'";
+
+        Cursor cursor = db.rawQuery(
+                consulta,
+                new String[]{correoUsuario}
+        );
+
+        if (cursor.moveToFirst() &&
+                cursor.getString(0) != null) {
+
+            String categoria = cursor.getString(0);
+
+            double cantidad = cursor.getDouble(1);
+
+            resultado = categoria + " · " + cantidad + "€";
+        }
+
+        cursor.close();
+
+        db.close();
+
+        return resultado;
+    }
+
+
+    public static Cursor obtenerEvolucionMensual(Context context, String correoUsuario) {
+
+        DbHelper helper = new DbHelper(context);
+
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        String consulta =
+                "SELECT " +
+                        "strftime('%m', fecha) mes, " +
+                        "SUM(CASE WHEN tipo='ingreso' THEN cantidad ELSE 0 END) ingresos, " +
+                        "SUM(CASE WHEN tipo='gasto' THEN cantidad ELSE 0 END) gastos " +
+                        "FROM movimientos m " +
+                        "INNER JOIN usuarios u ON m.id_usuario = u.id_usuario " +
+                        "WHERE u.email = ? " +
+                        "AND strftime('%Y', fecha) = strftime('%Y', 'now') " +
+                        "GROUP BY mes " +
+                        "ORDER BY mes ASC";
+
+        return db.rawQuery(
+                consulta,
+                new String[]{correoUsuario}
+        );
+    }
 }

@@ -1,21 +1,411 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fondo_principal"
     tools:context=".Ventanas.Graficas">
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="178dp"
-        android:layout_marginTop="282dp"
-        android:layout_marginEnd="175dp"
-        android:text="Graficas"
+    <!-- HEADER -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/headerGraficas"
+        android:layout_width="0dp"
+        android:layout_height="210dp"
+        android:background="@color/color_principal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- TITULO -->
+
+        <TextView
+            android:id="@+id/textTituloGraficas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="25dp"
+            android:text="Gráficas"
+            android:textColor="@android:color/white"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- CARD BALANCE -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardBalance"
+            android:layout_width="0dp"
+            android:layout_height="110dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="18dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textTituloGraficas">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#365273"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/textBalance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BALANCE TOTAL"
+                    android:textColor="#AFC3D6"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/campoBalance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="+0,00 €"
+                    android:textColor="@color/ingreso"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textBalance" />
+
+                <TextView
+                    android:id="@+id/textResumenBalance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Tus ingresos superan tus gastos"
+                    android:textColor="#AFC3D6"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/campoBalance" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!-- CARD CATEGORIAS -->
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardCategorias"
+        android:layout_width="0dp"
+        android:layout_height="195dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="22dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerGraficas">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bordes_card"
+            android:padding="14dp">
+
+            <TextView
+                android:id="@+id/textCategorias"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gastos por categoría"
+                android:textColor="@color/texto_principal"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- BOTONES -->
+
+            <TextView
+                android:id="@+id/botonGastos"
+                android:layout_width="76dp"
+                android:layout_height="32dp"
+                android:background="@drawable/tab_activo"
+                android:gravity="center"
+                android:text="Gastos"
+                android:textColor="@android:color/white"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/botonIngresos"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/botonIngresos"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:background="@drawable/tab_inactivo"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Ingresos"
+                android:textColor="@color/texto_principal"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- GRAFICA -->
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/graficaCategorias"
+                android:layout_width="105dp"
+                android:layout_height="105dp"
+                android:layout_marginTop="30dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textCategorias" />
+
+            <!-- LEYENDA -->
+
+            <LinearLayout
+                android:id="@+id/layoutLeyenda"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/graficaCategorias"
+                app:layout_constraintTop_toBottomOf="@id/textCategorias">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="• Vivienda     650€"
+                    android:textColor="#4A90E2"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="• Compras     320€"
+                    android:textColor="#E74C3C"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="• Transporte  180€"
+                    android:textColor="#F39C12"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="• Ocio         95€"
+                    android:textColor="#27AE60"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="• Otros        55€"
+                    android:textColor="#9B59B6"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <!-- EVOLUCION -->
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardEvolucion"
+        android:layout_width="0dp"
+        android:layout_height="170dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="22dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardCategorias">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bordes_card"
+            android:padding="14dp">
+
+            <TextView
+                android:id="@+id/textEvolucion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Evolución mensual "
+                android:textColor="@color/texto_principal"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/graficaMensual"
+                android:layout_width="0dp"
+                android:layout_height="108dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textEvolucion" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <!-- RESUMEN EXTRA -->
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardResumenExtra"
+        android:layout_width="0dp"
+        android:layout_height="115dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardEvolucion">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bordes_card"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+
+            <!-- MAYOR GASTO -->
+
+            <ImageView
+                android:id="@+id/iconoMayorGasto"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_gasto"
+                android:padding="7dp"
+                app:layout_constraintBottom_toBottomOf="@id/textValorMayorGasto"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/exclamacion"
+                app:tint="@color/gasto" />
+
+            <TextView
+                android:id="@+id/textMayorGasto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:text="Mayor gasto"
+                android:textColor="@color/texto_secundario"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/iconoMayorGasto"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textValorMayorGasto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Vivienda · 650€"
+                android:textColor="@color/texto_principal"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/iconoMayorGasto"
+                app:layout_constraintTop_toBottomOf="@id/textMayorGasto" />
+
+
+            <!-- MAYOR INGRESO -->
+
+            <ImageView
+                android:id="@+id/iconoMayorIngreso"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bg_ingreso"
+                android:padding="7dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iconoMayorGasto"
+                app:srcCompat="@drawable/ic_saldo_inicial_ingreso" />
+
+            <TextView
+                android:id="@+id/textMayorIngreso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:text="Mayor ingreso"
+                android:textColor="@color/texto_secundario"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@id/iconoMayorIngreso"
+                app:layout_constraintTop_toBottomOf="@id/textValorMayorGasto" />
+
+            <TextView
+                android:id="@+id/textValorMayorIngreso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Nómina · 2200€"
+                android:textColor="@color/texto_principal"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/iconoMayorIngreso"
+                app:layout_constraintTop_toBottomOf="@id/textMayorIngreso" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <!-- BOTTOM NAV -->
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardBottomMenu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="22dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bordes_card"
+            app:itemIconTint="@null"
+            app:itemTextColor="@color/bottom_nav_colors"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/bottom_menu" />
+
+    </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Balancea">
         <activity
+            android:name=".Ventanas.CambiarPassword"
+            android:exported="false" />
+        <activity
             android:name=".Ventanas.AgregarMovimiento"
             android:exported="false" />
         <activity

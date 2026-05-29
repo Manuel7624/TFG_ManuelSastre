@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         EditText correo = findViewById(R.id.campoCorreoLogin);
         EditText pass = findViewById(R.id.campoPassLogin);
 
+        ImageView imagenVerPass = findViewById(R.id.imagenVerPassLogin);
+
         Button inicarSesion = findViewById(R.id.botonIniciarSesionLogin);
         Button registrarse = findViewById(R.id.botonRegistrarseLogin);
 
@@ -49,6 +51,28 @@ public class MainActivity extends AppCompatActivity {
         imagenPass = findViewById(R.id.imagenPassLogin);
 
         DbHelper dbHelper = new DbHelper(this);
+
+        imagenVerPass.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, android.view.MotionEvent event) {
+
+                if (event.getAction() == android.view.MotionEvent.ACTION_DOWN) {
+
+                    pass.setTransformationMethod(null);
+                    imagenVerPass.setImageResource(R.drawable.ojo_normal);
+
+                } else if (event.getAction() == android.view.MotionEvent.ACTION_UP || event.getAction() == android.view.MotionEvent.ACTION_CANCEL) {
+
+                    pass.setTransformationMethod(android.text.method.PasswordTransformationMethod.getInstance());
+
+                    imagenVerPass.setImageResource(R.drawable.ojo_off);
+                }
+
+                pass.setSelection(pass.getText().length());
+
+                return true;
+            }
+        });
 
         correo.addTextChangedListener(new android.text.TextWatcher() {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}

@@ -595,4 +595,22 @@ public class Consultas extends DbHelper{
                 new String[]{correoUsuario}
         );
     }
+
+    public static boolean cambiarPassword(Context context, String email, String nuevaPassword) {
+
+        DbHelper helper = new DbHelper(context);
+
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put("password", nuevaPassword);
+
+        int filas = db.update(TABLA_USUARIOS, values, "email = ?", new String[]{email});
+
+        db.close();
+
+        return filas > 0;
+    }
+
 }

@@ -74,19 +74,12 @@ public class Principal extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
         EdgeToEdge.enable(this);
-
         setContentView(R.layout.activity_principal);
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-
             return insets;
         });
 
@@ -226,15 +219,6 @@ public class Principal extends AppCompatActivity {
         double saldo = Consultas.obtenerSaldoActual(this, CorreoActual);
 
         campoSaldoActualPrincipal.setText(saldo + " €");
-
-        if (saldo < 0) {
-
-            campoSaldoActualPrincipal.setTextColor(getColor(R.color.gasto));
-
-        } else {
-
-            campoSaldoActualPrincipal.setTextColor(getColor(R.color.ingreso));
-        }
 
 
         // INGRESOS Y GASTOS
@@ -724,19 +708,6 @@ public class Principal extends AppCompatActivity {
         TextView campoSaldoActualPrincipal = findViewById(R.id.campoSaldoActualPrincipal);
 
         campoSaldoActualPrincipal.setText(saldo + " €");
-
-        if (saldo < 0) {
-
-            campoSaldoActualPrincipal.setTextColor(
-                    getColor(R.color.gasto)
-            );
-
-        } else {
-
-            campoSaldoActualPrincipal.setTextColor(
-                    getColor(R.color.ingreso)
-            );
-        }
 
 
         double ingresos = Consultas.obtenerIngresos(this, CorreoActual);

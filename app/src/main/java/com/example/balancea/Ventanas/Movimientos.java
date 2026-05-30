@@ -28,23 +28,46 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
+/**
+ * Actividad que muestra el histórico detallado de movimientos del usuario.
+ * Permite filtrar por tipo (ingreso/gasto), buscar por texto y ordenar por fecha o recencia.
+ */
 public class Movimientos extends AppCompatActivity {
 
+    /** Vista de lista para mostrar los movimientos. */
     ListView listViewMovimientos;
-    TextView botonTodos;
-    TextView botonIngresos;
-    TextView botonGastos;
-    TextView botonOrdenFecha;
+    
+    /** Botones de filtrado por tipo de movimiento. */
+    TextView botonTodos, botonIngresos, botonGastos;
+    
+    /** Botones de ordenación. */
+    TextView botonOrdenFecha, botonOrdenRecientes;
+    
+    /** Campo de búsqueda de texto. */
     EditText campoBuscar;
+    
+    /** Botón para añadir un nuevo movimiento. */
     FloatingActionButton botonAgregarMovimiento;
+    
+    /** Lista de datos de movimientos cargados. */
     ArrayList<Movimiento> lista;
+    
+    /** Adaptador personalizado para la lista de movimientos. */
     AdaptadorMovimientos adaptador;
+    
+    /** Estado actual del filtro seleccionado. */
     String filtroActual = "todos";
+    
+    /** Estado actual del criterio de ordenación. */
     String ordenActual = "fecha";
-    TextView botonOrdenRecientes;
 
+    /** Variable para controlar el doble toque al salir de la aplicación. */
     private boolean salir = false;
 
+    /**
+     * Inicializa la actividad, configura la lista y los eventos de filtrado.
+     * @param savedInstanceState Estado guardado de la instancia.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,216 +79,120 @@ public class Movimientos extends AppCompatActivity {
             return insets;
         });
 
-
-        // COMPONENTES
-
+        // Inicialización de componentes
         listViewMovimientos = findViewById(R.id.listaMovimientos);
-
         botonTodos = findViewById(R.id.filtroTodos);
-
         botonIngresos = findViewById(R.id.filtroIngresos);
-
         botonGastos = findViewById(R.id.filtroGastos);
-
         botonOrdenFecha = findViewById(R.id.filtroFecha);
-
         botonOrdenRecientes = findViewById(R.id.filtroRecientes);
-
         campoBuscar = findViewById(R.id.campoBuscarMovimiento);
-
         botonAgregarMovimiento = findViewById(R.id.botonAgregarMovimientoPrincipal);
-
         BottomNavigationView bottomNavigation = findViewById(R.id.bottomNavigation);
 
-
-        // CARGAR MOVIMIENTOS
-
+        // Carga inicial
         cargarMovimientos("", filtroActual, ordenActual);
 
-
-        // FILTRO TODOS
-
+        // Configuración de eventos de filtros
         botonTodos.setOnClickListener(v -> {
-
             filtroActual = "todos";
-
             actualizarFiltros();
-
             cargarMovimientos(campoBuscar.getText().toString(), filtroActual, ordenActual);
         });
-
-
-        // FILTRO INGRESOS
 
         botonIngresos.setOnClickListener(v -> {
-
             filtroActual = "ingreso";
-
             actualizarFiltros();
-
             cargarMovimientos(campoBuscar.getText().toString(), filtroActual, ordenActual);
         });
-
-
-        // FILTRO GASTOS
 
         botonGastos.setOnClickListener(v -> {
-
             filtroActual = "gasto";
-
             actualizarFiltros();
-
             cargarMovimientos(campoBuscar.getText().toString(), filtroActual, ordenActual);
         });
 
-
-        // ORDEN FECHA
-
+        // Configuración de eventos de ordenación
         botonOrdenFecha.setOnClickListener(v -> {
-
             ordenActual = "fecha";
-
             actualizarOrden();
-
             cargarMovimientos(campoBuscar.getText().toString(), filtroActual, ordenActual);
         });
 
         botonOrdenRecientes.setOnClickListener(v -> {
-
             ordenActual = "recientes";
-
             actualizarOrden();
-
             cargarMovimientos(campoBuscar.getText().toString(), filtroActual, ordenActual);
         });
 
-
-        // BUSCADOR
-
+        // Lógica del buscador en tiempo real
         campoBuscar.addTextChangedListener(new TextWatcher() {
-
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                 cargarMovimientos(s.toString(), filtroActual, ordenActual);
             }
-
             @Override
-            public void afterTextChanged(Editable s) {
-
-            }
+            public void afterTextChanged(Editable s) {}
         });
-
-
-        // BOTON AGREGAR MOVIMIENTO
 
         botonAgregarMovimiento.setOnClickListener(v -> {
-
-            Intent intent = new Intent(this, AgregarMovimiento.class);
-
-            startActivity(intent);
+            startActivity(new Intent(this, AgregarMovimiento.class));
         });
 
-
-        // NAVEGACION
-
+        // Configuración de la navegación inferior
         bottomNavigation.setSelectedItemId(R.id.nav_movimientos);
-
         bottomNavigation.setOnItemSelectedListener(item -> {
-
             int id = item.getItemId();
-
             if (id == R.id.nav_home) {
-
                 startActivity(new Intent(this, Principal.class));
-
                 overridePendingTransition(0, 0);
-
                 finish();
-
                 return true;
             }
-
-            if (id == R.id.nav_movimientos) {
-
-                return true;
-            }
-
+            if (id == R.id.nav_movimientos) return true;
             if (id == R.id.nav_stats) {
-
                 startActivity(new Intent(this, Graficas.class));
-
                 overridePendingTransition(0, 0);
-
                 finish();
-
                 return true;
             }
-
             return false;
         });
 
-        bottomNavigation.setOnItemReselectedListener(item -> {
-            // no hacer nada si ya estas en esta ventana
-        });
-
         actualizarFiltros();
-
         actualizarOrden();
 
-        // PULSAR DOS VECES PARA SALIR DE LA APLICACION
-
+        // Salida segura con doble toque
         getOnBackPressedDispatcher().addCallback(this, new androidx.activity.OnBackPressedCallback(true) {
-
             @Override
             public void handleOnBackPressed() {
-
                 if (salir) {
-
                     finishAffinity();
-
                 } else {
-
                     salir = true;
-
-                    Toast toast = Toast.makeText(
-                            Movimientos.this,
-                            "Pulse otra vez para salir",
-                            Toast.LENGTH_SHORT
-                    );
-
+                    Toast toast = Toast.makeText(Movimientos.this, "Pulse otra vez para salir", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
-
                     toast.show();
-
                     new android.os.Handler().postDelayed(() -> salir = false, 2000);
                 }
             }
         });
     }
 
-
+    /**
+     * Consulta la base de datos y actualiza la lista visual de movimientos.
+     * @param busqueda Texto de búsqueda.
+     * @param filtro Tipo de filtro aplicado.
+     * @param orden Criterio de ordenación.
+     */
     private void cargarMovimientos(String busqueda, String filtro, String orden) {
-
         lista = new ArrayList<>();
-
-        Cursor cursor = Consultas.obtenerMovimientos(
-                this,
-                CorreoActual,
-                filtro,
-                busqueda,
-                orden
-        );
+        Cursor cursor = Consultas.obtenerMovimientos(this, CorreoActual, filtro, busqueda, orden);
 
         while(cursor.moveToNext()){
-
             lista.add(new Movimiento(
-
                     cursor.getString(0),
                     cursor.getString(1),
                     cursor.getDouble(2),
@@ -274,81 +201,58 @@ public class Movimientos extends AppCompatActivity {
                     cursor.getString(5)
             ));
         }
-
         cursor.close();
-
         adaptador = new AdaptadorMovimientos(this, lista);
-
         listViewMovimientos.setAdapter(adaptador);
     }
 
-
+    /**
+     * Actualiza la apariencia visual de los botones de filtro de tipo.
+     */
     private void actualizarFiltros() {
-
         botonTodos.setBackgroundResource(R.drawable.tab_inactivo);
-
         botonIngresos.setBackgroundResource(R.drawable.tab_inactivo);
-
         botonGastos.setBackgroundResource(R.drawable.tab_inactivo);
-
-
         botonTodos.setTextColor(getColor(R.color.texto_principal));
-
         botonIngresos.setTextColor(getColor(R.color.texto_principal));
-
         botonGastos.setTextColor(getColor(R.color.texto_principal));
 
-
         if(filtroActual.equals("todos")){
-
             botonTodos.setBackgroundResource(R.drawable.tab_activo);
-
             botonTodos.setTextColor(getColor(R.color.tarjetas_cards));
-
         }else if(filtroActual.equals("ingreso")){
-
             botonIngresos.setBackgroundResource(R.drawable.tab_activo);
-
             botonIngresos.setTextColor(getColor(R.color.tarjetas_cards));
-
         }else{
-
             botonGastos.setBackgroundResource(R.drawable.tab_activo);
-
             botonGastos.setTextColor(getColor(R.color.tarjetas_cards));
         }
     }
 
-
+    /**
+     * Actualiza la apariencia visual de los botones de criterio de ordenación.
+     */
     private void actualizarOrden() {
-
         botonOrdenFecha.setBackgroundResource(R.drawable.tab_inactivo);
-
         botonOrdenRecientes.setBackgroundResource(R.drawable.tab_inactivo);
-
         botonOrdenFecha.setTextColor(getColor(R.color.texto_principal));
-
         botonOrdenRecientes.setTextColor(getColor(R.color.texto_principal));
 
-
         if(ordenActual.equals("fecha")){
-
             botonOrdenFecha.setBackgroundResource(R.drawable.tab_activo);
-
             botonOrdenFecha.setTextColor(getColor(R.color.tarjetas_cards));
-
         }else{
-
             botonOrdenRecientes.setBackgroundResource(R.drawable.tab_activo);
-
             botonOrdenRecientes.setTextColor(getColor(R.color.tarjetas_cards));
         }
     }
 
+    /**
+     * Refresca la lista de movimientos al recuperar el foco de la actividad.
+     */
     @Override
     protected void onResume() {
         super.onResume();
-
         cargarMovimientos(campoBuscar.getText().toString(), filtroActual, ordenActual);
     }
 }

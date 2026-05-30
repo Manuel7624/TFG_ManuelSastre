@@ -12,10 +12,19 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.balancea.R;
 
+/**
+ * Pantalla de bienvenida (Splash Screen) que se muestra al iniciar la aplicación.
+ * Permite mostrar el logotipo de la marca antes de redirigir al login.
+ */
 public class Splash extends AppCompatActivity {
 
+    /** Duración en milisegundos de la pantalla de bienvenida. */
     private static final int TIEMPO_SPLASH = 2500;
 
+    /**
+     * Inicializa la actividad y programa la transición automática a MainActivity.
+     * @param savedInstanceState Estado guardado de la instancia.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,14 +36,12 @@ public class Splash extends AppCompatActivity {
             return insets;
         });
 
+        // Temporizador para saltar a la pantalla principal de login
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
                 Intent intent = new Intent(Splash.this, MainActivity.class);
-
                 startActivity(intent);
-
                 finish();
             }
         }, TIEMPO_SPLASH);

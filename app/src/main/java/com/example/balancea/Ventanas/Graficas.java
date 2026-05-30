@@ -34,24 +34,36 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+/**
+ * Actividad que gestiona la visualización de estadísticas mediante gráficos.
+ * Muestra el balance total, la distribución por categorías y la evolución mensual.
+ */
 public class Graficas extends AppCompatActivity {
 
-    TextView campoBalance;
-    TextView campoResumenBalance;
+    /** TextViews para mostrar el balance monetario y un resumen textual. */
+    TextView campoBalance, campoResumenBalance;
 
-    TextView botonGastos;
-    TextView botonIngresos;
+    /** Botones de filtro para alternar la gráfica de categorías entre gastos e ingresos. */
+    TextView botonGastos, botonIngresos;
 
+    /** Gráfico circular para la distribución por categorías. */
     PieChart graficaCategorias;
+    /** Gráfico de barras para la evolución mensual comparativa. */
     BarChart graficaMensual;
 
+    /** Contenedor dinámico para la leyenda personalizada de la gráfica de categorías. */
     LinearLayout layoutLeyenda;
 
-    TextView textValorMayorGasto;
-    TextView textValorMayorIngreso;
+    /** TextViews que muestran los valores máximos históricos detectados. */
+    TextView textValorMayorGasto, textValorMayorIngreso;
 
+    /** Estado del filtro de la gráfica de categorías. */
     boolean mostrandoGastos = true;
 
+    /**
+     * Inicializa la interfaz, configura las gráficas y carga los datos desde la BD.
+     * @param savedInstanceState Estado guardado de la instancia.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,477 +75,250 @@ public class Graficas extends AppCompatActivity {
             return insets;
         });
 
-
-        // COMPONENTES
-
+        // Componentes
         campoBalance = findViewById(R.id.campoBalance);
-
         campoResumenBalance = findViewById(R.id.textResumenBalance);
-
         botonGastos = findViewById(R.id.botonGastos);
-
         botonIngresos = findViewById(R.id.botonIngresos);
-
         graficaCategorias = findViewById(R.id.graficaCategorias);
-
         graficaMensual = findViewById(R.id.graficaMensual);
-
         layoutLeyenda = findViewById(R.id.layoutLeyenda);
-
         textValorMayorGasto = findViewById(R.id.textValorMayorGasto);
-
         textValorMayorIngreso = findViewById(R.id.textValorMayorIngreso);
 
-
-        // CONFIG GRAFICA CATEGORIAS
-
-        graficaCategorias.getDescription().setEnabled(false);
-
-        graficaCategorias.setDrawHoleEnabled(true);
-
-        graficaCategorias.setHoleRadius(72f);
-
-        graficaCategorias.setTransparentCircleRadius(0f);
-
-        graficaCategorias.getLegend().setEnabled(false);
-
-        graficaCategorias.setRotationEnabled(false);
-
-        graficaCategorias.setDrawEntryLabels(false);
-
-        graficaCategorias.setHighlightPerTapEnabled(false);
-
-
-        // CONFIG GRAFICA MENSUAL
-
-        Description descripcion = new Description();
-
-        descripcion.setText("");
-
-        graficaMensual.setDescription(descripcion);
-
-        graficaMensual.getLegend().setEnabled(false);
-
-        graficaMensual.setFitBars(true);
-
-        graficaMensual.setDrawGridBackground(false);
-
-        graficaMensual.setScaleEnabled(false);
-
-        graficaMensual.setPinchZoom(false);
-
-        graficaMensual.setDoubleTapToZoomEnabled(false);
-
-        graficaMensual.getAxisRight().setEnabled(false);
-
-        graficaMensual.getAxisLeft().setTextColor(getColor(R.color.texto_secundario));
-
-        graficaMensual.getAxisLeft().setDrawGridLines(false);
-
-        graficaMensual.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-
-        graficaMensual.getXAxis().setDrawGridLines(false);
-
-        graficaMensual.getXAxis().setTextColor(getColor(R.color.texto_secundario));
-
-        graficaMensual.getXAxis().setGranularity(1f);
-
-        TextView textEvol = findViewById(R.id.textEvolucion);
+        configurarEsteticaGraficas();
 
         int añoActual = Calendar.getInstance().get(Calendar.YEAR);
+        ((TextView)findViewById(R.id.textEvolucion)).setText("Evolucion mensual " + añoActual);
 
-        textEvol.setText("Evolucion mensual " + añoActual);
-
-        // CARGAR DATOS
-
+        // Carga inicial
         cargarBalance();
-
         cargarGraficaCategorias(true);
-
         cargarGraficaMensual();
-
         cargarMayoresMovimientos();
 
-
-        // BOTONES
-
+        // Control de botones de filtro
         botonGastos.setOnClickListener(v -> {
-
             mostrandoGastos = true;
-
-            botonGastos.setBackgroundResource(R.drawable.tab_activo);
-
-            botonIngresos.setBackgroundResource(R.drawable.tab_inactivo);
-
-            botonGastos.setTextColor(getColor(android.R.color.white));
-
-            botonIngresos.setTextColor(getColor(R.color.texto_principal));
-
+            cambiarEstiloFiltro(botonGastos, botonIngresos);
             cargarGraficaCategorias(true);
         });
 
-
         botonIngresos.setOnClickListener(v -> {
-
             mostrandoGastos = false;
-
-            botonIngresos.setBackgroundResource(R.drawable.tab_activo);
-
-            botonGastos.setBackgroundResource(R.drawable.tab_inactivo);
-
-            botonIngresos.setTextColor(getColor(android.R.color.white));
-
-            botonGastos.setTextColor(getColor(R.color.texto_principal));
-
+            cambiarEstiloFiltro(botonIngresos, botonGastos);
             cargarGraficaCategorias(false);
         });
 
-
-        // BOTTOM NAVIGATION
-
+        // Configuración de navegación
         BottomNavigationView bottomNavigation = findViewById(R.id.bottomNavigation);
-
         bottomNavigation.setSelectedItemId(R.id.nav_stats);
-
         bottomNavigation.setOnItemSelectedListener(item -> {
-
             int id = item.getItemId();
-
             if (id == R.id.nav_home) {
-
                 startActivity(new Intent(this, Principal.class));
-
                 overridePendingTransition(0, 0);
-
                 finish();
-
                 return true;
             }
-
             if (id == R.id.nav_movimientos) {
-
                 startActivity(new Intent(this, Movimientos.class));
-
                 overridePendingTransition(0, 0);
-
                 finish();
-
                 return true;
             }
-
             return id == R.id.nav_stats;
         });
-
-        bottomNavigation.setOnItemReselectedListener(item -> {
-
-            // NO HACER NADA
-        });
     }
 
+    /**
+     * Establece los parámetros visuales para los gráficos de la pantalla.
+     */
+    private void configurarEsteticaGraficas() {
+        // PieChart
+        graficaCategorias.getDescription().setEnabled(false);
+        graficaCategorias.setDrawHoleEnabled(true);
+        graficaCategorias.setHoleRadius(72f);
+        graficaCategorias.setTransparentCircleRadius(0f);
+        graficaCategorias.getLegend().setEnabled(false);
+        graficaCategorias.setRotationEnabled(false);
+        graficaCategorias.setDrawEntryLabels(false);
+        graficaCategorias.setHighlightPerTapEnabled(false);
 
+        // BarChart
+        graficaMensual.getDescription().setText("");
+        graficaMensual.getLegend().setEnabled(false);
+        graficaMensual.setFitBars(true);
+        graficaMensual.setDrawGridBackground(false);
+        graficaMensual.setScaleEnabled(false);
+        graficaMensual.setPinchZoom(false);
+        graficaMensual.getAxisRight().setEnabled(false);
+        graficaMensual.getAxisLeft().setTextColor(getColor(R.color.texto_secundario));
+        graficaMensual.getAxisLeft().setDrawGridLines(false);
+        graficaMensual.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        graficaMensual.getXAxis().setDrawGridLines(false);
+        graficaMensual.getXAxis().setTextColor(getColor(R.color.texto_secundario));
+        graficaMensual.getXAxis().setGranularity(1f);
+    }
 
+    /**
+     * Cambia el estilo de los botones para indicar cuál está activo.
+     * @param activo Botón seleccionado.
+     * @param inactivo Botón no seleccionado.
+     */
+    private void cambiarEstiloFiltro(TextView activo, TextView inactivo) {
+        activo.setBackgroundResource(R.drawable.tab_activo);
+        inactivo.setBackgroundResource(R.drawable.tab_inactivo);
+        activo.setTextColor(Color.WHITE);
+        inactivo.setTextColor(getColor(R.color.texto_principal));
+    }
+
+    /**
+     * Calcula y muestra el balance total y el mensaje de resumen correspondiente.
+     */
     private void cargarBalance() {
-
         double ingresos = Consultas.obtenerIngresos(this, CorreoActual);
-
         double gastos = Consultas.obtenerGastos(this, CorreoActual);
-
         double balance = ingresos - gastos;
-
-
         campoBalance.setText(String.format("%.2f €", balance));
-
-
-        if (balance >= 0) {
-
-            campoBalance.setTextColor(getColor(R.color.ingreso));
-
-            campoResumenBalance.setText("Tus ingresos superan tus gastos");
-
-        } else {
-
-            campoBalance.setTextColor(getColor(R.color.gasto));
-
-            campoResumenBalance.setText("Tus gastos superan tus ingresos");
-        }
+        campoBalance.setTextColor(getColor(balance >= 0 ? R.color.ingreso : R.color.gasto));
+        campoResumenBalance.setText(balance >= 0 ? "Tus ingresos superan tus gastos" : "Tus gastos superan tus ingresos");
     }
 
-
-
+    /**
+     * Genera la gráfica circular y su leyenda personalizada basada en las categorías.
+     * @param gastos true para mostrar distribución de gastos, false para ingresos.
+     */
     private void cargarGraficaCategorias(boolean gastos) {
-
         ArrayList<PieEntry> entradas = new ArrayList<>();
-
         layoutLeyenda.removeAllViews();
+        Cursor cursor = gastos ? Consultas.obtenerGastosPorCategoria(this, CorreoActual) : Consultas.obtenerIngresosPorCategoria(this, CorreoActual);
 
-        Cursor cursor;
-
-
-        if (gastos) {
-
-            cursor = Consultas.obtenerGastosPorCategoria(this, CorreoActual);
-
-        } else {
-
-            cursor =
-                    Consultas.obtenerIngresosPorCategoria(this, CorreoActual);
-        }
-
-
-        int[] colores = {
-
-                Color.parseColor("#4A90E2"),
-                Color.parseColor("#E74C3C"),
-                Color.parseColor("#F39C12"),
-                Color.parseColor("#27AE60"),
-                Color.parseColor("#9B59B6"),
-                Color.parseColor("#1ABC9C"),
-                Color.parseColor("#E67E22")
-        };
-
+        int[] colores = {Color.parseColor("#4A90E2"), Color.parseColor("#E74C3C"), Color.parseColor("#F39C12"),
+                         Color.parseColor("#27AE60"), Color.parseColor("#9B59B6"), Color.parseColor("#1ABC9C"), Color.parseColor("#E67E22")};
 
         int contador = 0;
-
-
         while (cursor.moveToNext()) {
-
             String categoria = cursor.getString(0);
-
             double total = cursor.getDouble(1);
-
-
             entradas.add(new PieEntry((float) total, categoria));
 
-
             TextView texto = new TextView(this);
-
             texto.setText("• " + categoria + "   " + String.format("%.2f €", total));
-
             texto.setTextSize(13);
-
             texto.setPadding(0, 6, 0, 0);
-
             texto.setTextColor(colores[contador % colores.length]);
-
             layoutLeyenda.addView(texto);
-
             contador++;
         }
-
         cursor.close();
 
-
         if (entradas.isEmpty()) {
-
             graficaCategorias.clear();
-
-            graficaCategorias.setData(null);
-
             graficaCategorias.setNoDataText("Sin movimientos");
-
             graficaCategorias.invalidate();
-
             return;
         }
 
-
         PieDataSet dataSet = new PieDataSet(entradas, "");
-
         ArrayList<Integer> listaColores = new ArrayList<>();
-
-
-        for (int i = 0; i < entradas.size(); i++) {
-
-            listaColores.add(colores[i % colores.length]);
-        }
-
+        for (int i = 0; i < entradas.size(); i++) listaColores.add(colores[i % colores.length]);
 
         dataSet.setColors(listaColores);
-
         dataSet.setDrawValues(false);
-
         dataSet.setSliceSpace(4f);
-
-        dataSet.setSelectionShift(0f);
-
-
-        PieData pieData = new PieData(dataSet);
-
-        graficaCategorias.setData(pieData);
-
+        graficaCategorias.setData(new PieData(dataSet));
         graficaCategorias.animateY(500);
-
         graficaCategorias.invalidate();
     }
 
-
-
+    /**
+     * Genera la gráfica de barras con la comparativa mensual de ingresos y gastos.
+     */
     private void cargarGraficaMensual() {
-
-        ArrayList<BarEntry> entradasIngresos = new ArrayList<>();
-
-        ArrayList<BarEntry> entradasGastos = new ArrayList<>();
-
-        ArrayList<String> etiquetasMeses = new ArrayList<>();
-
-        boolean hayDatos = false;
-
-
+        ArrayList<BarEntry> eIngresos = new ArrayList<>(), eGastos = new ArrayList<>();
+        ArrayList<String> etiquetas = new ArrayList<>();
         Cursor cursor = Consultas.obtenerEvolucionMensual(this, CorreoActual);
-
-
-        int posicion = 0;
-
+        int pos = 0;
 
         while (cursor.moveToNext()) {
-
-            hayDatos = true;
-
-            String mesNumero = cursor.getString(0);
-
-            float ingresos = (float) cursor.getDouble(1);
-
-            float gastos = (float) cursor.getDouble(2);
-
-
-            entradasIngresos.add(new BarEntry(posicion, ingresos));
-
-            entradasGastos.add(new BarEntry(posicion, gastos));
-
-
-            etiquetasMeses.add(convertirMes(mesNumero));
-
-            posicion++;
+            eIngresos.add(new BarEntry(pos, (float) cursor.getDouble(1)));
+            eGastos.add(new BarEntry(pos, (float) cursor.getDouble(2)));
+            etiquetas.add(convertirMes(cursor.getString(0)));
+            pos++;
         }
-
         cursor.close();
 
-
-        if (!hayDatos) {
-
+        if (etiquetas.isEmpty()) {
             graficaMensual.clear();
-
             graficaMensual.setNoDataText("Sin movimientos");
-
             graficaMensual.invalidate();
-
             return;
         }
 
+        BarDataSet dsIngresos = new BarDataSet(eIngresos, "Ingresos");
+        dsIngresos.setColor(Color.parseColor("#4A90E2"));
+        dsIngresos.setDrawValues(false);
 
-        BarDataSet dataSetIngresos = new BarDataSet(entradasIngresos, "Ingresos");
+        BarDataSet dsGastos = new BarDataSet(eGastos, "Gastos");
+        dsGastos.setColor(Color.parseColor("#E74C3C"));
+        dsGastos.setDrawValues(false);
 
-        dataSetIngresos.setColor(Color.parseColor("#4A90E2"));
-
-        dataSetIngresos.setDrawValues(false);
-
-
-        BarDataSet dataSetGastos = new BarDataSet(entradasGastos, "Gastos");
-
-        dataSetGastos.setColor(Color.parseColor("#E74C3C"));
-
-        dataSetGastos.setDrawValues(false);
-
-
-        BarData barData = new BarData(dataSetIngresos, dataSetGastos);
-
-        float groupSpace = 0.4f;
-        float barSpace = 0.02f;
-        float barWidth = 0.28f;
-
-
+        BarData barData = new BarData(dsIngresos, dsGastos);
+        float groupSpace = 0.4f, barSpace = 0.02f, barWidth = 0.28f;
         barData.setBarWidth(barWidth);
 
-
         graficaMensual.setData(barData);
-
-
         graficaMensual.getXAxis().setAxisMinimum(0f);
-
-        graficaMensual.getXAxis().setAxisMaximum(0f + graficaMensual.getBarData().getGroupWidth(groupSpace, barSpace) * etiquetasMeses.size());
-
-
+        graficaMensual.getXAxis().setAxisMaximum(0f + barData.getGroupWidth(groupSpace, barSpace) * etiquetas.size());
         graficaMensual.groupBars(0f, groupSpace, barSpace);
 
-
-
-        graficaMensual.getXAxis().setValueFormatter(
-                new ValueFormatter() {
-
-                    @Override
-                    public String getAxisLabel(float value, AxisBase axis) {
-
-                        int index = (int) value;
-
-                        if (index >= 0 &&
-                                index < etiquetasMeses.size()) {
-
-                            return etiquetasMeses.get(index);
-                        }
-
-                        return "";
-                    }
-                });
-
-
+        graficaMensual.getXAxis().setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getAxisLabel(float value, AxisBase axis) {
+                int index = (int) value;
+                return (index >= 0 && index < etiquetas.size()) ? etiquetas.get(index) : "";
+            }
+        });
         graficaMensual.getXAxis().setCenterAxisLabels(true);
-
         graficaMensual.getXAxis().setGranularity(1f);
-
-        graficaMensual.getXAxis().setLabelCount(etiquetasMeses.size());
-
+        graficaMensual.getXAxis().setLabelCount(etiquetas.size());
         graficaMensual.animateY(600);
-
         graficaMensual.invalidate();
     }
 
-    private String convertirMes(String numeroMes) {
-
-        switch (numeroMes) {
-
-            case "01": return "Ene";
-            case "02": return "Feb";
-            case "03": return "Mar";
-            case "04": return "Abr";
-            case "05": return "May";
-            case "06": return "Jun";
-            case "07": return "Jul";
-            case "08": return "Ago";
-            case "09": return "Sep";
-            case "10": return "Oct";
-            case "11": return "Nov";
-            case "12": return "Dic";
+    /**
+     * Convierte el número de mes (01-12) en su abreviatura textual.
+     * @param num Mes en formato numérico.
+     * @return Nombre abreviado del mes.
+     */
+    private String convertirMes(String num) {
+        switch (num) {
+            case "01": return "Ene"; case "02": return "Feb"; case "03": return "Mar";
+            case "04": return "Abr"; case "05": return "May"; case "06": return "Jun";
+            case "07": return "Jul"; case "08": return "Ago"; case "09": return "Sep";
+            case "10": return "Oct"; case "11": return "Nov"; case "12": return "Dic";
+            default: return "";
         }
-
-        return "";
     }
 
-
-
+    /**
+     * Carga y muestra los hitos de mayor gasto e ingreso histórico.
+     */
     private void cargarMayoresMovimientos() {
-
-        String mayorGasto = Consultas.obtenerMayorGasto(this, CorreoActual);
-
-        String mayorIngreso = Consultas.obtenerMayorIngreso(this, CorreoActual);
-
-        textValorMayorGasto.setText(mayorGasto);
-
-        textValorMayorIngreso.setText(mayorIngreso);
+        textValorMayorGasto.setText(Consultas.obtenerMayorGasto(this, CorreoActual));
+        textValorMayorIngreso.setText(Consultas.obtenerMayorIngreso(this, CorreoActual));
     }
 
-
-
+    /**
+     * Refresca todos los datos de las gráficas al reanudar la actividad.
+     */
     @Override
     protected void onResume() {
-
         super.onResume();
-
         cargarBalance();
-
         cargarGraficaCategorias(mostrandoGastos);
-
         cargarGraficaMensual();
-
         cargarMayoresMovimientos();
     }
 }

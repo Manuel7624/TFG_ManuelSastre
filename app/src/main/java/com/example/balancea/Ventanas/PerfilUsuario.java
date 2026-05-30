@@ -54,7 +54,9 @@ public class PerfilUsuario extends AppCompatActivity {
 
         String nombre = Consultas.obtenerNombreUsuario(this, CorreoActual);
 
-        nombre = nombre.substring(0, 1).toUpperCase() + nombre.substring(1);
+        if (!nombre.isEmpty()) {
+            nombre = nombre.substring(0, 1).toUpperCase() + nombre.substring(1);
+        }
 
         txtNombre.setText(nombre);
 

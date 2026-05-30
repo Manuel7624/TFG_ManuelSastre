@@ -35,55 +35,25 @@ public class CambiarPassword extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
         EdgeToEdge.enable(this);
-
         setContentView(R.layout.activity_cambiar_password);
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-
-            Insets systemBars =
-                    insets.getInsets(WindowInsetsCompat.Type.systemBars());
-
-            v.setPadding(
-                    systemBars.left,
-                    systemBars.top,
-                    systemBars.right,
-                    systemBars.bottom
-            );
-
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
 
-        botonVolver =
-                findViewById(R.id.botonVolver);
-
-        editPasswordActual =
-                findViewById(R.id.editPasswordActual);
-
-        editNuevaPassword =
-                findViewById(R.id.editNuevaPassword);
-
-        editConfirmarPassword =
-                findViewById(R.id.editConfirmarPassword);
-
-        botonGuardarPassword =
-                findViewById(R.id.botonGuardarPassword);
-
-        textErrorCambiarPassword =
-                findViewById(R.id.textErrorCambiarPassword);
-
-        imagenVePassAcCambiarPassword =
-                findViewById(R.id.imagenVePassAcCambiarPassword);
-
-        imagenVePassNueCambiarPassword =
-                findViewById(R.id.imagenVePassNueCambiarPassword);
-
-        imagenVePassConCambiarPassword =
-                findViewById(R.id.imagenVePassConCambiarPassword);
+        botonVolver = findViewById(R.id.botonVolver);
+        editPasswordActual = findViewById(R.id.editPasswordActual);
+        editNuevaPassword = findViewById(R.id.editNuevaPassword);
+        editConfirmarPassword = findViewById(R.id.editConfirmarPassword);
+        botonGuardarPassword = findViewById(R.id.botonGuardarPassword);
+        textErrorCambiarPassword = findViewById(R.id.textErrorCambiarPassword);
+        imagenVePassAcCambiarPassword = findViewById(R.id.imagenVePassAcCambiarPassword);
+        imagenVePassNueCambiarPassword = findViewById(R.id.imagenVePassNueCambiarPassword);
+        imagenVePassConCambiarPassword = findViewById(R.id.imagenVePassConCambiarPassword);
 
 
         botonVolver.setOnClickListener(v -> finish());
@@ -94,19 +64,14 @@ public class CambiarPassword extends AppCompatActivity {
             textErrorCambiarPassword.setVisibility(View.GONE);
 
 
-            String passwordActual =
-                    editPasswordActual.getText().toString().trim();
+            String passwordActual = editPasswordActual.getText().toString().trim();
 
-            String nuevaPassword =
-                    editNuevaPassword.getText().toString().trim();
+            String nuevaPassword = editNuevaPassword.getText().toString().trim();
 
-            String confirmarPassword =
-                    editConfirmarPassword.getText().toString().trim();
+            String confirmarPassword = editConfirmarPassword.getText().toString().trim();
 
 
-            if (passwordActual.isEmpty() ||
-                    nuevaPassword.isEmpty() ||
-                    confirmarPassword.isEmpty()) {
+            if (passwordActual.isEmpty() || nuevaPassword.isEmpty() || confirmarPassword.isEmpty()) {
 
                 mostrarError("Completa todos los campos");
 
@@ -114,22 +79,15 @@ public class CambiarPassword extends AppCompatActivity {
             }
 
 
-            Consultas consultas =
-                    new Consultas(this);
+            Consultas consultas = new Consultas(this);
 
 
-            boolean passwordCorrecta =
-                    consultas.acceder(
-                            CorreoActual,
-                            passwordActual
-                    );
+            boolean passwordCorrecta = consultas.acceder(CorreoActual, passwordActual);
 
 
             if (!passwordCorrecta) {
 
-                mostrarError(
-                        "La contraseña actual es incorrecta"
-                );
+                mostrarError("La contraseña actual es incorrecta");
 
                 editPasswordActual.setText("");
 
@@ -139,9 +97,7 @@ public class CambiarPassword extends AppCompatActivity {
 
             if (nuevaPassword.length() < 8) {
 
-                mostrarError(
-                        "La contraseña debe tener mínimo 8 caracteres"
-                );
+                mostrarError("La contraseña debe tener mínimo 8 caracteres");
 
                 return;
             }
@@ -149,9 +105,7 @@ public class CambiarPassword extends AppCompatActivity {
 
             if (!nuevaPassword.equals(confirmarPassword)) {
 
-                mostrarError(
-                        "Las contraseñas no coinciden"
-                );
+                mostrarError("Las contraseñas no coinciden");
 
                 editConfirmarPassword.setText("");
 
@@ -161,20 +115,13 @@ public class CambiarPassword extends AppCompatActivity {
 
             if (passwordActual.equals(nuevaPassword)) {
 
-                mostrarError(
-                        "La nueva contraseña no puede ser igual"
-                );
+                mostrarError("La nueva contraseña no puede ser igual");
 
                 return;
             }
 
 
-            boolean cambiado =
-                    Consultas.cambiarPassword(
-                            this,
-                            CorreoActual,
-                            nuevaPassword
-                    );
+            boolean cambiado = Consultas.cambiarPassword(this, CorreoActual, nuevaPassword);
 
 
             if (cambiado) {
@@ -183,9 +130,7 @@ public class CambiarPassword extends AppCompatActivity {
 
             } else {
 
-                mostrarError(
-                        "Error al cambiar la contraseña"
-                );
+                mostrarError("Error al cambiar la contraseña");
             }
         });
 
@@ -278,7 +223,6 @@ public class CambiarPassword extends AppCompatActivity {
     private void mostrarError(String mensaje) {
 
         textErrorCambiarPassword.setText(mensaje);
-
         textErrorCambiarPassword.setVisibility(View.VISIBLE);
     }
 }

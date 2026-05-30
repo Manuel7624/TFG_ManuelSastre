@@ -549,13 +549,9 @@ public class Consultas extends DbHelper{
                         "WHERE u.email = ? " +
                         "AND m.tipo = 'ingreso'";
 
-        Cursor cursor = db.rawQuery(
-                consulta,
-                new String[]{correoUsuario}
-        );
+        Cursor cursor = db.rawQuery(consulta, new String[]{correoUsuario});
 
-        if (cursor.moveToFirst() &&
-                cursor.getString(0) != null) {
+        if (cursor.moveToFirst() && cursor.getString(0) != null) {
 
             String categoria = cursor.getString(0);
 
@@ -590,10 +586,7 @@ public class Consultas extends DbHelper{
                         "GROUP BY mes " +
                         "ORDER BY mes ASC";
 
-        return db.rawQuery(
-                consulta,
-                new String[]{correoUsuario}
-        );
+        return db.rawQuery(consulta, new String[]{correoUsuario});
     }
 
     public static boolean cambiarPassword(Context context, String email, String nuevaPassword) {

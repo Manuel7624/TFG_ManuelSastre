@@ -21,9 +21,7 @@ public class AdaptadorMovimientos extends ArrayAdapter<Movimiento> {
     ArrayList<Movimiento> lista;
 
     public AdaptadorMovimientos(Context context, ArrayList<Movimiento> lista) {
-
         super(context, 0, lista);
-
         this.context = context;
         this.lista = lista;
     }
@@ -34,27 +32,21 @@ public class AdaptadorMovimientos extends ArrayAdapter<Movimiento> {
 
         if(convertView == null){
 
-            convertView = LayoutInflater.from(context)
-                    .inflate(R.layout.item_movimiento, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_movimiento, parent, false);
         }
 
         Movimiento movimiento = lista.get(position);
 
         ImageView icono = convertView.findViewById(R.id.iconoMovimientoItem);
-
         TextView categoria = convertView.findViewById(R.id.campoCategoriaItem);
-
         TextView descripcion = convertView.findViewById(R.id.campoDescripcionItem);
-
         TextView fecha = convertView.findViewById(R.id.campoFechaItem);
-
         TextView cantidad = convertView.findViewById(R.id.campoCantidadItem);
 
 
         categoria.setText(movimiento.getCategoria());
 
-        if(movimiento.getDescripcion() == null ||
-                movimiento.getDescripcion().isEmpty()){
+        if(movimiento.getDescripcion() == null || movimiento.getDescripcion().isEmpty()){
 
             descripcion.setText("Sin descripción");
 
@@ -71,15 +63,13 @@ public class AdaptadorMovimientos extends ArrayAdapter<Movimiento> {
             cantidad.setText("-" + movimiento.getCantidad() + " €");
 
             cantidad.setTextColor(context.getColor(R.color.gasto));
-
             icono.setBackgroundResource(R.drawable.bg_gasto);
 
-        }else{
+        } else {
 
             cantidad.setText("+" + movimiento.getCantidad() + " €");
 
             cantidad.setTextColor(context.getColor(R.color.ingreso));
-
             icono.setBackgroundResource(R.drawable.bg_ingreso);
         }
 

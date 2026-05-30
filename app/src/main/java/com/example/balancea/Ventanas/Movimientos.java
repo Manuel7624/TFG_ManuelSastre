@@ -91,11 +91,7 @@ public class Movimientos extends AppCompatActivity {
 
             actualizarFiltros();
 
-            cargarMovimientos(
-                    campoBuscar.getText().toString(),
-                    filtroActual,
-                    ordenActual
-            );
+            cargarMovimientos(campoBuscar.getText().toString(), filtroActual, ordenActual);
         });
 
 
@@ -107,11 +103,7 @@ public class Movimientos extends AppCompatActivity {
 
             actualizarFiltros();
 
-            cargarMovimientos(
-                    campoBuscar.getText().toString(),
-                    filtroActual,
-                    ordenActual
-            );
+            cargarMovimientos(campoBuscar.getText().toString(), filtroActual, ordenActual);
         });
 
 
@@ -123,11 +115,7 @@ public class Movimientos extends AppCompatActivity {
 
             actualizarFiltros();
 
-            cargarMovimientos(
-                    campoBuscar.getText().toString(),
-                    filtroActual,
-                    ordenActual
-            );
+            cargarMovimientos(campoBuscar.getText().toString(), filtroActual, ordenActual);
         });
 
 
@@ -139,11 +127,7 @@ public class Movimientos extends AppCompatActivity {
 
             actualizarOrden();
 
-            cargarMovimientos(
-                    campoBuscar.getText().toString(),
-                    filtroActual,
-                    ordenActual
-            );
+            cargarMovimientos(campoBuscar.getText().toString(), filtroActual, ordenActual);
         });
 
         botonOrdenRecientes.setOnClickListener(v -> {
@@ -152,11 +136,7 @@ public class Movimientos extends AppCompatActivity {
 
             actualizarOrden();
 
-            cargarMovimientos(
-                    campoBuscar.getText().toString(),
-                    filtroActual,
-                    ordenActual
-            );
+            cargarMovimientos(campoBuscar.getText().toString(), filtroActual, ordenActual);
         });
 
 
@@ -172,11 +152,7 @@ public class Movimientos extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                cargarMovimientos(
-                        s.toString(),
-                        filtroActual,
-                        ordenActual
-                );
+                cargarMovimientos(s.toString(), filtroActual, ordenActual);
             }
 
             @Override
@@ -190,8 +166,7 @@ public class Movimientos extends AppCompatActivity {
 
         botonAgregarMovimiento.setOnClickListener(v -> {
 
-            Intent intent =
-                    new Intent(this, AgregarMovimiento.class);
+            Intent intent = new Intent(this, AgregarMovimiento.class);
 
             startActivity(intent);
         });

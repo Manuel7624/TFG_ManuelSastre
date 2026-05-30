@@ -66,32 +66,23 @@ public class Graficas extends AppCompatActivity {
 
         // COMPONENTES
 
-        campoBalance =
-                findViewById(R.id.campoBalance);
+        campoBalance = findViewById(R.id.campoBalance);
 
-        campoResumenBalance =
-                findViewById(R.id.textResumenBalance);
+        campoResumenBalance = findViewById(R.id.textResumenBalance);
 
-        botonGastos =
-                findViewById(R.id.botonGastos);
+        botonGastos = findViewById(R.id.botonGastos);
 
-        botonIngresos =
-                findViewById(R.id.botonIngresos);
+        botonIngresos = findViewById(R.id.botonIngresos);
 
-        graficaCategorias =
-                findViewById(R.id.graficaCategorias);
+        graficaCategorias = findViewById(R.id.graficaCategorias);
 
-        graficaMensual =
-                findViewById(R.id.graficaMensual);
+        graficaMensual = findViewById(R.id.graficaMensual);
 
-        layoutLeyenda =
-                findViewById(R.id.layoutLeyenda);
+        layoutLeyenda = findViewById(R.id.layoutLeyenda);
 
-        textValorMayorGasto =
-                findViewById(R.id.textValorMayorGasto);
+        textValorMayorGasto = findViewById(R.id.textValorMayorGasto);
 
-        textValorMayorIngreso =
-                findViewById(R.id.textValorMayorIngreso);
+        textValorMayorIngreso = findViewById(R.id.textValorMayorIngreso);
 
 
         // CONFIG GRAFICA CATEGORIAS
@@ -135,21 +126,15 @@ public class Graficas extends AppCompatActivity {
 
         graficaMensual.getAxisRight().setEnabled(false);
 
-        graficaMensual.getAxisLeft().setTextColor(
-                getColor(R.color.texto_secundario)
-        );
+        graficaMensual.getAxisLeft().setTextColor(getColor(R.color.texto_secundario));
 
         graficaMensual.getAxisLeft().setDrawGridLines(false);
 
-        graficaMensual.getXAxis().setPosition(
-                XAxis.XAxisPosition.BOTTOM
-        );
+        graficaMensual.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
 
         graficaMensual.getXAxis().setDrawGridLines(false);
 
-        graficaMensual.getXAxis().setTextColor(
-                getColor(R.color.texto_secundario)
-        );
+        graficaMensual.getXAxis().setTextColor(getColor(R.color.texto_secundario));
 
         graficaMensual.getXAxis().setGranularity(1f);
 
@@ -176,21 +161,13 @@ public class Graficas extends AppCompatActivity {
 
             mostrandoGastos = true;
 
-            botonGastos.setBackgroundResource(
-                    R.drawable.tab_activo
-            );
+            botonGastos.setBackgroundResource(R.drawable.tab_activo);
 
-            botonIngresos.setBackgroundResource(
-                    R.drawable.tab_inactivo
-            );
+            botonIngresos.setBackgroundResource(R.drawable.tab_inactivo);
 
-            botonGastos.setTextColor(
-                    getColor(android.R.color.white)
-            );
+            botonGastos.setTextColor(getColor(android.R.color.white));
 
-            botonIngresos.setTextColor(
-                    getColor(R.color.texto_principal)
-            );
+            botonIngresos.setTextColor(getColor(R.color.texto_principal));
 
             cargarGraficaCategorias(true);
         });
@@ -200,21 +177,13 @@ public class Graficas extends AppCompatActivity {
 
             mostrandoGastos = false;
 
-            botonIngresos.setBackgroundResource(
-                    R.drawable.tab_activo
-            );
+            botonIngresos.setBackgroundResource(R.drawable.tab_activo);
 
-            botonGastos.setBackgroundResource(
-                    R.drawable.tab_inactivo
-            );
+            botonGastos.setBackgroundResource(R.drawable.tab_inactivo);
 
-            botonIngresos.setTextColor(
-                    getColor(android.R.color.white)
-            );
+            botonIngresos.setTextColor(getColor(android.R.color.white));
 
-            botonGastos.setTextColor(
-                    getColor(R.color.texto_principal)
-            );
+            botonGastos.setTextColor(getColor(R.color.texto_principal));
 
             cargarGraficaCategorias(false);
         });
@@ -222,8 +191,7 @@ public class Graficas extends AppCompatActivity {
 
         // BOTTOM NAVIGATION
 
-        BottomNavigationView bottomNavigation =
-                findViewById(R.id.bottomNavigation);
+        BottomNavigationView bottomNavigation = findViewById(R.id.bottomNavigation);
 
         bottomNavigation.setSelectedItemId(R.id.nav_stats);
 
@@ -233,9 +201,7 @@ public class Graficas extends AppCompatActivity {
 
             if (id == R.id.nav_home) {
 
-                startActivity(
-                        new Intent(this, Principal.class)
-                );
+                startActivity(new Intent(this, Principal.class));
 
                 overridePendingTransition(0, 0);
 
@@ -246,9 +212,7 @@ public class Graficas extends AppCompatActivity {
 
             if (id == R.id.nav_movimientos) {
 
-                startActivity(
-                        new Intent(this, Movimientos.class)
-                );
+                startActivity(new Intent(this, Movimientos.class));
 
                 overridePendingTransition(0, 0);
 
@@ -270,39 +234,27 @@ public class Graficas extends AppCompatActivity {
 
     private void cargarBalance() {
 
-        double ingresos =
-                Consultas.obtenerIngresos(this, CorreoActual);
+        double ingresos = Consultas.obtenerIngresos(this, CorreoActual);
 
-        double gastos =
-                Consultas.obtenerGastos(this, CorreoActual);
+        double gastos = Consultas.obtenerGastos(this, CorreoActual);
 
         double balance = ingresos - gastos;
 
 
-        campoBalance.setText(
-                String.format("%.2f €", balance)
-        );
+        campoBalance.setText(String.format("%.2f €", balance));
 
 
         if (balance >= 0) {
 
-            campoBalance.setTextColor(
-                    getColor(R.color.ingreso)
-            );
+            campoBalance.setTextColor(getColor(R.color.ingreso));
 
-            campoResumenBalance.setText(
-                    "Tus ingresos superan tus gastos"
-            );
+            campoResumenBalance.setText("Tus ingresos superan tus gastos");
 
         } else {
 
-            campoBalance.setTextColor(
-                    getColor(R.color.gasto)
-            );
+            campoBalance.setTextColor(getColor(R.color.gasto));
 
-            campoResumenBalance.setText(
-                    "Tus gastos superan tus ingresos"
-            );
+            campoResumenBalance.setText("Tus gastos superan tus ingresos");
         }
     }
 
@@ -310,8 +262,7 @@ public class Graficas extends AppCompatActivity {
 
     private void cargarGraficaCategorias(boolean gastos) {
 
-        ArrayList<PieEntry> entradas =
-                new ArrayList<>();
+        ArrayList<PieEntry> entradas = new ArrayList<>();
 
         layoutLeyenda.removeAllViews();
 
@@ -320,19 +271,12 @@ public class Graficas extends AppCompatActivity {
 
         if (gastos) {
 
-            cursor =
-                    Consultas.obtenerGastosPorCategoria(
-                            this,
-                            CorreoActual
-                    );
+            cursor = Consultas.obtenerGastosPorCategoria(this, CorreoActual);
 
         } else {
 
             cursor =
-                    Consultas.obtenerIngresosPorCategoria(
-                            this,
-                            CorreoActual
-                    );
+                    Consultas.obtenerIngresosPorCategoria(this, CorreoActual);
         }
 
 
@@ -353,35 +297,23 @@ public class Graficas extends AppCompatActivity {
 
         while (cursor.moveToNext()) {
 
-            String categoria =
-                    cursor.getString(0);
+            String categoria = cursor.getString(0);
 
-            double total =
-                    cursor.getDouble(1);
+            double total = cursor.getDouble(1);
 
 
-            entradas.add(
-                    new PieEntry(
-                            (float) total,
-                            categoria
-                    )
-            );
+            entradas.add(new PieEntry((float) total, categoria));
 
 
             TextView texto = new TextView(this);
 
-            texto.setText(
-                    "• " + categoria + "   " +
-                            String.format("%.2f €", total)
-            );
+            texto.setText("• " + categoria + "   " + String.format("%.2f €", total));
 
             texto.setTextSize(13);
 
             texto.setPadding(0, 6, 0, 0);
 
-            texto.setTextColor(
-                    colores[contador % colores.length]
-            );
+            texto.setTextColor(colores[contador % colores.length]);
 
             layoutLeyenda.addView(texto);
 
@@ -405,18 +337,14 @@ public class Graficas extends AppCompatActivity {
         }
 
 
-        PieDataSet dataSet =
-                new PieDataSet(entradas, "");
+        PieDataSet dataSet = new PieDataSet(entradas, "");
 
-        ArrayList<Integer> listaColores =
-                new ArrayList<>();
+        ArrayList<Integer> listaColores = new ArrayList<>();
 
 
         for (int i = 0; i < entradas.size(); i++) {
 
-            listaColores.add(
-                    colores[i % colores.length]
-            );
+            listaColores.add(colores[i % colores.length]);
         }
 
 
@@ -429,8 +357,7 @@ public class Graficas extends AppCompatActivity {
         dataSet.setSelectionShift(0f);
 
 
-        PieData pieData =
-                new PieData(dataSet);
+        PieData pieData = new PieData(dataSet);
 
         graficaCategorias.setData(pieData);
 
@@ -443,23 +370,16 @@ public class Graficas extends AppCompatActivity {
 
     private void cargarGraficaMensual() {
 
-        ArrayList<BarEntry> entradasIngresos =
-                new ArrayList<>();
+        ArrayList<BarEntry> entradasIngresos = new ArrayList<>();
 
-        ArrayList<BarEntry> entradasGastos =
-                new ArrayList<>();
+        ArrayList<BarEntry> entradasGastos = new ArrayList<>();
 
-        ArrayList<String> etiquetasMeses =
-                new ArrayList<>();
+        ArrayList<String> etiquetasMeses = new ArrayList<>();
 
         boolean hayDatos = false;
 
 
-        Cursor cursor =
-                Consultas.obtenerEvolucionMensual(
-                        this,
-                        CorreoActual
-                );
+        Cursor cursor = Consultas.obtenerEvolucionMensual(this, CorreoActual);
 
 
         int posicion = 0;
@@ -469,34 +389,19 @@ public class Graficas extends AppCompatActivity {
 
             hayDatos = true;
 
-            String mesNumero =
-                    cursor.getString(0);
+            String mesNumero = cursor.getString(0);
 
-            float ingresos =
-                    (float) cursor.getDouble(1);
+            float ingresos = (float) cursor.getDouble(1);
 
-            float gastos =
-                    (float) cursor.getDouble(2);
+            float gastos = (float) cursor.getDouble(2);
 
 
-            entradasIngresos.add(
-                    new BarEntry(
-                            posicion,
-                            ingresos
-                    )
-            );
+            entradasIngresos.add(new BarEntry(posicion, ingresos));
 
-            entradasGastos.add(
-                    new BarEntry(
-                            posicion,
-                            gastos
-                    )
-            );
+            entradasGastos.add(new BarEntry(posicion, gastos));
 
 
-            etiquetasMeses.add(
-                    convertirMes(mesNumero)
-            );
+            etiquetasMeses.add(convertirMes(mesNumero));
 
             posicion++;
         }
@@ -516,44 +421,24 @@ public class Graficas extends AppCompatActivity {
         }
 
 
-        BarDataSet dataSetIngresos =
-                new BarDataSet(
-                        entradasIngresos,
-                        "Ingresos"
-                );
+        BarDataSet dataSetIngresos = new BarDataSet(entradasIngresos, "Ingresos");
 
-        dataSetIngresos.setColor(
-                Color.parseColor("#4A90E2")
-        );
+        dataSetIngresos.setColor(Color.parseColor("#4A90E2"));
 
         dataSetIngresos.setDrawValues(false);
 
 
-        BarDataSet dataSetGastos =
-                new BarDataSet(
-                        entradasGastos,
-                        "Gastos"
-                );
+        BarDataSet dataSetGastos = new BarDataSet(entradasGastos, "Gastos");
 
-        dataSetGastos.setColor(
-                Color.parseColor("#E74C3C")
-        );
+        dataSetGastos.setColor(Color.parseColor("#E74C3C"));
 
         dataSetGastos.setDrawValues(false);
 
 
-        BarData barData =
-                new BarData(
-                        dataSetIngresos,
-                        dataSetGastos
-                );
-
-
+        BarData barData = new BarData(dataSetIngresos, dataSetGastos);
 
         float groupSpace = 0.4f;
-
         float barSpace = 0.02f;
-
         float barWidth = 0.28f;
 
 
@@ -565,20 +450,10 @@ public class Graficas extends AppCompatActivity {
 
         graficaMensual.getXAxis().setAxisMinimum(0f);
 
-        graficaMensual.getXAxis().setAxisMaximum(
-                0f +
-                        graficaMensual.getBarData().getGroupWidth(
-                                groupSpace,
-                                barSpace
-                        ) * etiquetasMeses.size()
-        );
+        graficaMensual.getXAxis().setAxisMaximum(0f + graficaMensual.getBarData().getGroupWidth(groupSpace, barSpace) * etiquetasMeses.size());
 
 
-        graficaMensual.groupBars(
-                0f,
-                groupSpace,
-                barSpace
-        );
+        graficaMensual.groupBars(0f, groupSpace, barSpace);
 
 
 
@@ -586,10 +461,7 @@ public class Graficas extends AppCompatActivity {
                 new ValueFormatter() {
 
                     @Override
-                    public String getAxisLabel(
-                            float value,
-                            AxisBase axis
-                    ) {
+                    public String getAxisLabel(float value, AxisBase axis) {
 
                         int index = (int) value;
 
@@ -608,10 +480,7 @@ public class Graficas extends AppCompatActivity {
 
         graficaMensual.getXAxis().setGranularity(1f);
 
-        graficaMensual.getXAxis().setLabelCount(
-                etiquetasMeses.size()
-        );
-
+        graficaMensual.getXAxis().setLabelCount(etiquetasMeses.size());
 
         graficaMensual.animateY(600);
 
@@ -643,17 +512,9 @@ public class Graficas extends AppCompatActivity {
 
     private void cargarMayoresMovimientos() {
 
-        String mayorGasto =
-                Consultas.obtenerMayorGasto(
-                        this,
-                        CorreoActual
-                );
+        String mayorGasto = Consultas.obtenerMayorGasto(this, CorreoActual);
 
-        String mayorIngreso =
-                Consultas.obtenerMayorIngreso(
-                        this,
-                        CorreoActual
-                );
+        String mayorIngreso = Consultas.obtenerMayorIngreso(this, CorreoActual);
 
         textValorMayorGasto.setText(mayorGasto);
 

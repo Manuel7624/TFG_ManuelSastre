@@ -88,78 +88,56 @@ public class Principal extends AppCompatActivity {
 
         campoSaludo = findViewById(R.id.campoSaludoUsuarioPrincipal);
 
-        TextView campoSaldoActualPrincipal =
-                findViewById(R.id.campoSaldoActualPrincipal);
+        TextView campoSaldoActualPrincipal = findViewById(R.id.campoSaldoActualPrincipal);
 
-        ImageView perfilUsuario =
-                findViewById(R.id.imagenPerfilUsuarioPrincipal);
+        ImageView perfilUsuario = findViewById(R.id.imagenPerfilUsuarioPrincipal);
 
-        TextView campoIngresosCardPrincipal =
-                findViewById(R.id.campoIngresosCardPrincipal);
+        TextView campoIngresosCardPrincipal = findViewById(R.id.campoIngresosCardPrincipal);
 
-        TextView campoGastosCardPrincipal =
-                findViewById(R.id.campoGastosCardPrincipal);
+        TextView campoGastosCardPrincipal = findViewById(R.id.campoGastosCardPrincipal);
 
-        botonEsteMes =
-                findViewById(R.id.campoEsteMesPrincipal);
+        botonEsteMes = findViewById(R.id.campoEsteMesPrincipal);
 
-        botonGeneral =
-                findViewById(R.id.campoGeneralPrincipal);
+        botonGeneral = findViewById(R.id.campoGeneralPrincipal);
 
-        campoIngresosResumen =
-                findViewById(R.id.campoIngresosResumenPrincipal);
+        campoIngresosResumen = findViewById(R.id.campoIngresosResumenPrincipal);
 
-        campoGastosResumen =
-                findViewById(R.id.campoGastosResumenPrincipal);
+        campoGastosResumen = findViewById(R.id.campoGastosResumenPrincipal);
 
-        campoPorcentajeBalancePrincipal =
-                findViewById(R.id.campoPorcentajeBalancePrincipal);
+        campoPorcentajeBalancePrincipal = findViewById(R.id.campoPorcentajeBalancePrincipal);
 
-        graficaResumen =
-                findViewById(R.id.graficaResumen);
+        graficaResumen = findViewById(R.id.graficaResumen);
 
 
         // MOVIMIENTO 1
 
-        iconoMovimiento =
-                findViewById(R.id.iconoMovimiento);
+        iconoMovimiento = findViewById(R.id.iconoMovimiento);
 
-        campoTituloMovimiento =
-                findViewById(R.id.campoTituloMovimiento);
+        campoTituloMovimiento = findViewById(R.id.campoTituloMovimiento);
 
-        campoFechaMovimiento =
-                findViewById(R.id.campoFechaMovimiento);
+        campoFechaMovimiento = findViewById(R.id.campoFechaMovimiento);
 
-        campoImporteMovimiento =
-                findViewById(R.id.campoImporteMovimiento);
+        campoImporteMovimiento = findViewById(R.id.campoImporteMovimiento);
 
 
         // MOVIMIENTO 2
 
-        iconoMovimiento2 =
-                findViewById(R.id.iconoMovimiento2);
+        iconoMovimiento2 = findViewById(R.id.iconoMovimiento2);
 
-        campoTituloMovimiento2 =
-                findViewById(R.id.campoTituloMovimiento2);
+        campoTituloMovimiento2 = findViewById(R.id.campoTituloMovimiento2);
 
-        campoFechaMovimiento2 =
-                findViewById(R.id.campoFechaMovimiento2);
+        campoFechaMovimiento2 = findViewById(R.id.campoFechaMovimiento2);
 
-        campoImporteMovimiento2 =
-                findViewById(R.id.campoImporteMovimiento2);
+        campoImporteMovimiento2 = findViewById(R.id.campoImporteMovimiento2);
 
-        layoutMovimiento2 =
-                findViewById(R.id.layoutMovimiento2);
-
+        layoutMovimiento2 = findViewById(R.id.layoutMovimiento2);
 
         // BOTON AGREGAR
 
-        botonAgregarMovimientoPrincipal =
-                findViewById(R.id.botonAgregarMovimientoPrincipal);
+        botonAgregarMovimientoPrincipal = findViewById(R.id.botonAgregarMovimientoPrincipal);
 
 
-        BottomNavigationView bottomNavigation =
-                findViewById(R.id.bottomNavigation);
+        BottomNavigationView bottomNavigation = findViewById(R.id.bottomNavigation);
 
 
 
@@ -167,8 +145,7 @@ public class Principal extends AppCompatActivity {
 
         botonAgregarMovimientoPrincipal.setOnClickListener(v -> {
 
-            Intent intent =
-                    new Intent(this, AgregarMovimiento.class);
+            Intent intent = new Intent(this, AgregarMovimiento.class);
 
             startActivity(intent);
         });
@@ -195,8 +172,7 @@ public class Principal extends AppCompatActivity {
 
         // CARGAR SALUDO
 
-        String nombreUsuario =
-                Consultas.obtenerNombreUsuario(this, CorreoActual);
+        String nombreUsuario = Consultas.obtenerNombreUsuario(this, CorreoActual);
 
         campoSaludo.setText("Hola, " + nombreUsuario + " 👋");
 
@@ -206,8 +182,7 @@ public class Principal extends AppCompatActivity {
 
         perfilUsuario.setOnClickListener(v -> {
 
-            Intent intent =
-                    new Intent(Principal.this, PerfilUsuario.class);
+            Intent intent = new Intent(Principal.this, PerfilUsuario.class);
 
             startActivity(intent);
         });
@@ -223,11 +198,9 @@ public class Principal extends AppCompatActivity {
 
         // INGRESOS Y GASTOS
 
-        double ingresos =
-                Consultas.obtenerIngresos(this, CorreoActual);
+        double ingresos = Consultas.obtenerIngresos(this, CorreoActual);
 
-        double gastos =
-                Consultas.obtenerGastos(this, CorreoActual);
+        double gastos = Consultas.obtenerGastos(this, CorreoActual);
 
         campoIngresosCardPrincipal.setText(ingresos + " €");
 
@@ -255,13 +228,9 @@ public class Principal extends AppCompatActivity {
 
             botonGeneral.setBackgroundResource(R.drawable.tab_inactivo);
 
-            botonEsteMes.setTextColor(
-                    getColor(R.color.tarjetas_cards)
-            );
+            botonEsteMes.setTextColor(getColor(R.color.tarjetas_cards));
 
-            botonGeneral.setTextColor(
-                    getColor(R.color.texto_principal)
-            );
+            botonGeneral.setTextColor(getColor(R.color.texto_principal));
 
             cargarGrafica(true);
         });
@@ -276,13 +245,9 @@ public class Principal extends AppCompatActivity {
 
             botonEsteMes.setBackgroundResource(R.drawable.tab_inactivo);
 
-            botonGeneral.setTextColor(
-                    getColor(R.color.tarjetas_cards)
-            );
+            botonGeneral.setTextColor(getColor(R.color.tarjetas_cards));
 
-            botonEsteMes.setTextColor(
-                    getColor(R.color.texto_principal)
-            );
+            botonEsteMes.setTextColor(getColor(R.color.texto_principal));
 
             cargarGrafica(false);
         });
@@ -375,19 +340,15 @@ public class Principal extends AppCompatActivity {
 
         if (soloEsteMes) {
 
-            ingresos =
-                    Consultas.obtenerIngresosMesActual(this, CorreoActual);
+            ingresos = Consultas.obtenerIngresosMesActual(this, CorreoActual);
 
-            gastos =
-                    Consultas.obtenerGastosMesActual(this, CorreoActual);
+            gastos = Consultas.obtenerGastosMesActual(this, CorreoActual);
 
         } else {
 
-            ingresos =
-                    Consultas.obtenerIngresos(this, CorreoActual);
+            ingresos = Consultas.obtenerIngresos(this, CorreoActual);
 
-            gastos =
-                    Consultas.obtenerGastos(this, CorreoActual);
+            gastos = Consultas.obtenerGastos(this, CorreoActual);
         }
 
 
@@ -407,38 +368,29 @@ public class Principal extends AppCompatActivity {
 
         } else {
 
-            porcentajeBalance =
-                    ((ingresos - gastos) / ingresos) * 100;
+            porcentajeBalance = ((ingresos - gastos) / ingresos) * 100;
         }
 
         String textoPorcentaje;
 
         if (porcentajeBalance > 0) {
 
-            textoPorcentaje =
-                    "+" + (int) porcentajeBalance + "%";
+            textoPorcentaje = "+" + (int) porcentajeBalance + "%";
 
         } else {
 
-            textoPorcentaje =
-                    (int) porcentajeBalance + "%";
+            textoPorcentaje = (int) porcentajeBalance + "%";
         }
 
-        campoPorcentajeBalancePrincipal.setText(
-                textoPorcentaje
-        );
+        campoPorcentajeBalancePrincipal.setText(textoPorcentaje);
 
         if (porcentajeBalance >= 0) {
 
-            campoPorcentajeBalancePrincipal.setTextColor(
-                    getColor(R.color.ingreso)
-            );
+            campoPorcentajeBalancePrincipal.setTextColor(getColor(R.color.ingreso));
 
         } else {
 
-            campoPorcentajeBalancePrincipal.setTextColor(
-                    getColor(R.color.gasto)
-            );
+            campoPorcentajeBalancePrincipal.setTextColor(getColor(R.color.gasto));
         }
 
 
@@ -512,8 +464,7 @@ public class Principal extends AppCompatActivity {
         campoFechaMovimiento2.setText("-");
         campoImporteMovimiento2.setText("-");
 
-        Cursor cursor =
-                Consultas.obtenerUltimoMovimiento(this, CorreoActual);
+        Cursor cursor = Consultas.obtenerUltimoMovimiento(this, CorreoActual);
 
 
         int contador = 0;
@@ -651,8 +602,7 @@ public class Principal extends AppCompatActivity {
 
             String extra = "";
 
-            if (descripcion != null &&
-                    !descripcion.trim().isEmpty()) {
+            if (descripcion != null && !descripcion.trim().isEmpty()) {
 
                 extra = " · " + descripcion;
             }
@@ -723,10 +673,7 @@ public class Principal extends AppCompatActivity {
         campoGastosCardPrincipal.setText(gastos + " €");
 
 
-        cargarGrafica(
-                botonEsteMes.getCurrentTextColor()
-                        == getColor(R.color.tarjetas_cards)
-        );
+        cargarGrafica(botonEsteMes.getCurrentTextColor() == getColor(R.color.tarjetas_cards));
 
 
         cargarUltimosMovimientos();

@@ -28,7 +28,6 @@ public class AgregarMovimiento extends AppCompatActivity {
 
     TextView botonIngreso;
     TextView botonGasto;
-
     EditText campoCantidad;
     EditText campoDescripcion;
     EditText campoFecha;
@@ -58,25 +57,14 @@ public class AgregarMovimiento extends AppCompatActivity {
         // COMPONENTES
 
         botonIngreso = findViewById(R.id.botonIngreso);
-
         botonGasto = findViewById(R.id.botonGasto);
-
         campoCantidad = findViewById(R.id.campoCantidad);
-
         campoDescripcion = findViewById(R.id.campoDescripcion);
-
         campoFecha = findViewById(R.id.campoFecha);
-
         spinnerCategoria = findViewById(R.id.spinnerCategoria);
-
-        botonGuardarMovimiento =
-                findViewById(R.id.botonGuardarMovimiento);
-
+        botonGuardarMovimiento = findViewById(R.id.botonGuardarMovimiento);
         botonVolver = findViewById(R.id.botonVolver);
-
-        campoError =
-                findViewById(R.id.campoErrorAgregarMovimiento);
-
+        campoError = findViewById(R.id.campoErrorAgregarMovimiento);
 
         campoError.setVisibility(View.GONE);
 
@@ -93,7 +81,6 @@ public class AgregarMovimiento extends AppCompatActivity {
             tipoActual = "ingreso";
 
             actualizarTabs();
-
             cargarCategorias();
         });
 
@@ -105,7 +92,6 @@ public class AgregarMovimiento extends AppCompatActivity {
             tipoActual = "gasto";
 
             actualizarTabs();
-
             cargarCategorias();
         });
 
@@ -122,24 +108,16 @@ public class AgregarMovimiento extends AppCompatActivity {
 
             int day = calendario.get(Calendar.DAY_OF_MONTH);
 
-            DatePickerDialog dialog = new DatePickerDialog(
-
-                    this,
-
+            DatePickerDialog dialog = new DatePickerDialog(this,
                     (view, year1, month1, dayOfMonth) -> {
 
-                        String fecha =
-                                year1 + "-" +
-                                        String.format("%02d", month1 + 1) + "-" +
-                                        String.format("%02d", dayOfMonth);
+                        String fecha = year1 + "-" + String.format("%02d", month1 + 1) + "-" + String.format("%02d", dayOfMonth);
 
                         campoFecha.setText(fecha);
 
                     },
 
-                    year,
-                    month,
-                    day
+                    year, month, day
             );
 
             dialog.getDatePicker().setMaxDate(System.currentTimeMillis());
@@ -155,70 +133,39 @@ public class AgregarMovimiento extends AppCompatActivity {
             campoError.setVisibility(View.GONE);
 
 
-            if(campoCantidad.getText().toString().isEmpty()
-                    || campoFecha.getText().toString().isEmpty()
-                    || spinnerCategoria.getSelectedItem() == null){
+            if(campoCantidad.getText().toString().isEmpty() || campoFecha.getText().toString().isEmpty() || spinnerCategoria.getSelectedItem() == null){
 
                 campoError.setText(R.string.CamposObligatorios);
-
                 campoError.setVisibility(View.VISIBLE);
 
                 return;
             }
 
 
-            double cantidad = Double.parseDouble(
-                    campoCantidad.getText().toString()
-            );
+            double cantidad = Double.parseDouble(campoCantidad.getText().toString());
 
-            String descripcion =
-                    campoDescripcion.getText().toString();
+            String descripcion = campoDescripcion.getText().toString();
 
-            String fecha =
-                    campoFecha.getText().toString();
+            String fecha = campoFecha.getText().toString();
 
-            String categoria =
-                    spinnerCategoria.getSelectedItem().toString();
+            String categoria = spinnerCategoria.getSelectedItem().toString();
 
 
-            int idCategoria =
-                    Consultas.obtenerIdCategoria(
-                            this,
-                            categoria
-                    );
+            int idCategoria = Consultas.obtenerIdCategoria(this, categoria);
 
 
-            boolean resultado =
-                    Consultas.insertarMovimiento(
-
-                            this,
-
-                            CorreoActual,
-
-                            idCategoria,
-
-                            tipoActual,
-
-                            cantidad,
-
-                            descripcion,
-
-                            fecha
-                    );
-
+            boolean resultado = Consultas.insertarMovimiento(this, CorreoActual, idCategoria, tipoActual, cantidad, descripcion, fecha);
 
             if(resultado){
 
                 finish();
 
-            }else{
+            } else {
 
                 campoError.setText("Error al guardar movimiento");
-
                 campoError.setVisibility(View.VISIBLE);
             }
         });
-
 
         // VOLVER
 
@@ -228,22 +175,9 @@ public class AgregarMovimiento extends AppCompatActivity {
 
     private void cargarCategorias() {
 
-        ArrayList<String> lista =
-                Consultas.obtenerCategorias(
-                        this,
-                        tipoActual
-                );
+        ArrayList<String> lista = Consultas.obtenerCategorias(this, tipoActual);
 
-
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(
-
-                        this,
-
-                        android.R.layout.simple_spinner_dropdown_item,
-
-                        lista
-                );
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, lista);
 
         spinnerCategoria.setAdapter(adapter);
     }
@@ -267,7 +201,7 @@ public class AgregarMovimiento extends AppCompatActivity {
 
             botonIngreso.setTextColor(getColor(R.color.tarjetas_cards));
 
-        }else{
+        } else {
 
             botonGasto.setBackgroundResource(R.drawable.tab_activo);
 

@@ -85,6 +85,7 @@ public class Graficas extends AppCompatActivity {
         layoutLeyenda = findViewById(R.id.layoutLeyenda);
         textValorMayorGasto = findViewById(R.id.textValorMayorGasto);
         textValorMayorIngreso = findViewById(R.id.textValorMayorIngreso);
+        TextView textCategorias = findViewById(R.id.textCategorias);
 
         configurarEsteticaGraficas();
 
@@ -102,12 +103,14 @@ public class Graficas extends AppCompatActivity {
             mostrandoGastos = true;
             cambiarEstiloFiltro(botonGastos, botonIngresos);
             cargarGraficaCategorias(true);
+            textCategorias.setText("Gastos por categoría");
         });
 
         botonIngresos.setOnClickListener(v -> {
             mostrandoGastos = false;
             cambiarEstiloFiltro(botonIngresos, botonGastos);
             cargarGraficaCategorias(false);
+            textCategorias.setText("Ingresos por categoría");
         });
 
         // Configuración de navegación
